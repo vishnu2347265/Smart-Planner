@@ -1,15 +1,22 @@
-// import { createAppContainer, createSwitchNavigator } from 'react-navigation';
-// import TabNavigation from './TabNavigation';
-// import HomeScreen from '../screens/home';
+import React from 'react';
+import { View, StyleSheet } from 'react-native';
+import Login from '../screens/Login'
+import Register from '../screens/Register'
+import TabNavigation from '../router/TabNavigation'
+import { createStackNavigator } from '@react-navigation/stack';
 
-// const Navigation = createSwitchNavigator(
-//   {
-//     Home: HomeScreen,
-//     Tabs: TabNavigation,
-//   },
-//   {
-//     initialRouteName: 'Home',
-//   }
-// );
+const Navigation = () => {
+    const Stack = createStackNavigator();
 
-// export default createAppContainer(Navigation);
+    return (
+        <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="Register" component={Register} />
+            <Stack.Screen name="Tab" component={TabNavigation} />
+        </Stack.Navigator>
+    );
+}
+
+const styles = StyleSheet.create({})
+
+export default Navigation;
