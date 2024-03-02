@@ -4,11 +4,9 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faCalendarAlt, faTasks, faUser } from '@fortawesome/free-solid-svg-icons';
+import { TouchableOpacity, View } from 'react-native'; // Import AddTaskScreen
+import { faHome, faPlus } from '@fortawesome/free-solid-svg-icons';
 
-// Import screens
-import CalendarScreen from '../screens/calendar';
-import TasksScreen from '../screens/task';
-import ProfileScreen from '../screens/profile';
 import { Home } from 'react-native-feather';
 import TaskScreen from '../screens/task';
 import AddTaskScreen from '../screens/AddTaskScreen';
@@ -17,6 +15,32 @@ import Calendar from '../screens/calendar';
 
 
 const Tab = createBottomTabNavigator();
+
+const CustomTabBarButton = ({ children, onPress, accessibilityLabel }) => (
+  <TouchableOpacity
+    style={{
+      top: -30,
+      justifyContent: 'center',
+      alignItems: 'center',
+      // ...styles.shadow,
+    }}
+    onPress={onPress}
+    accessibilityLabel={accessibilityLabel}
+  >
+    <View
+      style={{
+        width: 70,
+        height: 70,
+        borderRadius: 35,
+        backgroundColor: '#e32f45',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
+      {children}
+    </View>
+  </TouchableOpacity>
+);
 
 const BottomTabs = () => {
   return (<Tab.Navigator

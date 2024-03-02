@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
+import Navigation from './src/router/Navigation'
 import { View, TouchableOpacity, StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from './src/screens/home';
@@ -12,36 +13,12 @@ import { faHome, faTasks, faUser, faCalendarAlt, faPlus } from '@fortawesome/fre
 
 const Tab = createBottomTabNavigator();
 
-const CustomTabBarButton = ({ children, onPress, accessibilityLabel }) => (
-  <TouchableOpacity
-    style={{
-      top: -30,
-      justifyContent: 'center',
-      alignItems: 'center',
-      ...styles.shadow,
-    }}
-    onPress={onPress}
-    accessibilityLabel={accessibilityLabel}
-  >
-    <View
-      style={{
-        width: 70,
-        height: 70,
-        borderRadius: 35,
-        backgroundColor: '#e32f45',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
-      {children}
-    </View>
-  </TouchableOpacity>
-);
+
 
 export default function App() {
   return (
     <NavigationContainer>
-      
+      <Navigation/>
     </NavigationContainer>
   );
 }

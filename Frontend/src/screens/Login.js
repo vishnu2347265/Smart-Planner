@@ -22,7 +22,7 @@ function Login() {
       .then((res) =>{ console.log(res.data);
       if(res.data.status == "ok"){
         Alert.alert("logged in successful");
-        navigation.navigate('Home');
+        navigation.navigate('Tab');
       }
     })
     .catch(error => {
