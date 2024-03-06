@@ -33,7 +33,7 @@ function Register() {
       password,
     };
     if (nameVerify && emailVerify && mobileVerify && passwordVerify) {
-      axios.post("http://0.0.0.0:5001/register", userData)
+      axios.post("http://10.0.2.2:5001/register", userData)
         .then((res) => {console.log(res.data)
           if (res.data.status === "ok") {
             Alert.alert(

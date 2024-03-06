@@ -18,7 +18,7 @@ function Login() {
       email: email,
       password,
     };
-    axios.post('http://0.0.0.0:5001/login-user', userData)
+    axios.post('http://10.0.2.2:5001/login-user', userData)
       .then((res) =>{ console.log(res.data);
       if(res.data.status == "ok"){
         Alert.alert("logged in successful");
@@ -44,7 +44,7 @@ function Login() {
           <Text style={styles.text_header}>Login!!!</Text>
           <View style={styles.action}>
             {<FontAwesome name="user-o" color="#420475" style={styles.smallIcon} />}
-            <TextInput placeholder='Mobile or Email' style={styles.textInput} onChangeText={(e)=>setEmail(e)} />
+            <TextInput placeholder='Email' style={styles.textInput} onChangeText={(e)=>setEmail(e)} />
           </View>
           <View style={styles.action}>
             {<FontAwesome name="lock" color="#420475" style={styles.smallIcon} />}
