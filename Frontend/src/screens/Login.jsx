@@ -1,42 +1,56 @@
-import React, { useState } from 'react';
-import styles from './style';
-import img from "../assets/mainlogo.jpg"
-import { useNavigation } from '@react-navigation/native';
-import { Image, Text, TextInput, View, TouchableOpacity, ScrollView, Alert } from 'react-native';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import axios from 'axios';
-
+import React, { useState } from "react";
+import styles from "./style";
+import img from "../assets/mainlogo.jpg";
+import { useNavigation } from "@react-navigation/native";
+import {
+  Image,
+  Text,
+  TextInput,
+  View,
+  TouchableOpacity,
+  ScrollView,
+  Alert,
+  ImageBackground,
+} from "react-native";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
+import axios from "axios";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 function Login() {
-  const navigation = useNavigation()
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const navigation = useNavigation();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const handleSubmit = ()=> {
+  const handleSubmit = () => {
     console.log(email, password);
     const userData = {
       email: email,
       password,
     };
-    axios.post('http://10.0.2.2:5001/login-user', userData)
-      .then((res) =>{ console.log(res.data);
-      if(res.data.status == "ok"){
-        Alert.alert("logged in successful");
-        navigation.navigate('Tab');
-      }
-    })
-    .catch(error => {
-      console.error("Error during login request:", error);
-      Alert.alert("Login failed", "An error occurred during login. Please try again later.");
-    });
-  }
-
+    axios
+      .post("http://10.0.2.2:5001/login-user", userData)
+      .then((res) => {
+        console.log(res.data);
+        if (res.data.status == "ok") {
+          Alert.alert("logged in successful");
+          navigation.navigate("Tab");
+        }
+      })
+      .catch((error) => {
+        console.error("Error during login request:", error);
+        Alert.alert(
+          "Login failed",
+          "An error occurred during login. Please try again later."
+        );
+      });
+  };
 
   return (
     <ScrollView
       contentContainerStyle={{ flexGrow: 1 }}
-      keyboardShouldPersistTaps={'always'}>
-      <View style={{ backgroundColor: 'white' }}>
+      keyboardShouldPersistTaps={"always"}
+    >
+      {/* <View style={{ backgroundColor: 'white' }}>
         <View style={styles.logoContainer}>
           <Image style={styles.logo} source={img} />
         </View>
@@ -112,10 +126,43 @@ function Login() {
             </View>
           </View>
         </View>
-      </View>
+      </View> */}
+      <ImageBackground className='flex-1'
+      source={require('../assets/loginBG-3.png')}>
+        <View className=" h-full justify-between">
+          <View className="flex flex-1 flex-col  px-10 py-52 items-start gap-5">
+            <Text className="font-sans text-white text-3xl font-bold pb-10">
+              Log in to start managing your tasks easily{" "}
+            </Text>
+            <View className="flex flex-col gap-2 items-start w-full pr-10">
+              <Text className="font-sans text-white">Email</Text>
+              <TextInput className="border font-semibold text-white border-white focus:border-[#DDFF94] focus:outline-none focus:ring-2 focus:ring-[#DDFF94] w-full rounded-md px-5 py-3" />
+            </View>
+            <View className="flex flex-col gap-2 items-start w-full pr-10">
+              <Text className="font-sans text-white">Password</Text>
+              <TextInput className="border font-semibold text-white border-white focus:border-[#DDFF94] focus:outline-none focus:ring-2 focus:ring-[#DDFF94] w-full rounded-md px-5 py-3" />
+            </View>
+          </View>
+          <View className="flex flex-col gap-2 mx-10 mb-10">
+            <View className="flex-row gap-2 items-end">
+              <Text className="text-white">Don't have an account?</Text>
+              <TouchableWithoutFeedback
+                onPress={(e) => navigation.navigate("Register")}
+              >
+                <Text className="text-[#DDFF94]">SignUp</Text>
+              </TouchableWithoutFeedback>
+            </View>
+            <TouchableOpacity
+            onPress={()=>navigation.navigate("Tab")}
+            className="bg-[#DDFF94] px-5 py-5 flex items-center justify-center rounded-full "
+            >
+              <Text className='text-black'>Login</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </ImageBackground>
     </ScrollView>
   );
-};
-
+}
 
 export default Login;
