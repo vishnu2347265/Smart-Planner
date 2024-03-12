@@ -2,13 +2,13 @@ import React from 'react';
 import styles from './style';
 import img from "../assets/mainlogo.jpg"
 import { useNavigation } from '@react-navigation/native';
-import { Image, Text, TextInput, View, TouchableOpacity, Alert } from 'react-native';
+import { Image, Text, TextInput, View, TouchableOpacity, Alert, ImageBackground } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import { useState } from 'react';
 import Error from 'react-native-vector-icons/MaterialIcons';
-import { ScrollView } from 'react-native-gesture-handler';
+import { ScrollView, TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { faL } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 
@@ -108,7 +108,7 @@ function Register() {
       showsVerticalScrollIndicator={false}
       keyboardShouldPersistTaps="always"
     >
-      <View>
+      {/* <View>
         <View style={styles.logoContainer}>
           <Image style={styles.logo} source={require('../assets/profile.png')} />
         </View>
@@ -211,7 +211,48 @@ function Register() {
           </TouchableOpacity>
         </View>
 
-      </View>
+      </View> */}
+      <ImageBackground className='flex-1'
+      source={require('../assets/loginBG-3.png')}>
+        <View className=" h-full justify-between">
+          <View className="flex flex-1 flex-col px-10 py-20 items-start gap-5">
+            <Text className="font-sans text-white text-3xl font-bold pb-10">
+            Create an account to take control of your day{" "}
+            </Text>
+            <View className="flex flex-col gap-2 items-start w-full pr-10">
+              <Text className="font-sans text-white">Name</Text>
+              <TextInput className="border font-semibold text-white border-white focus:border-[#DDFF94] focus:outline-none focus:ring-2 focus:ring-[#DDFF94] w-full rounded-md px-5 py-3" />
+            </View>
+            <View className="flex flex-col gap-2 items-start w-full pr-10">
+              <Text className="font-sans text-white">Email</Text>
+              <TextInput className="border font-semibold text-white border-white focus:border-[#DDFF94] focus:outline-none focus:ring-2 focus:ring-[#DDFF94] w-full rounded-md px-5 py-3" />
+            </View>
+            <View className="flex flex-col gap-2 items-start w-full pr-10">
+              <Text className="font-sans text-white">Password</Text>
+              <TextInput className="border font-semibold text-white border-white focus:border-[#DDFF94] focus:outline-none focus:ring-2 focus:ring-[#DDFF94] w-full rounded-md px-5 py-3" />
+            </View>
+            <View className="flex flex-col gap-2 items-start w-full pr-10">
+              <Text className="font-sans text-white">Password</Text>
+              <TextInput className="border font-semibold text-white border-white focus:border-[#DDFF94] focus:outline-none focus:ring-2 focus:ring-[#DDFF94] w-full rounded-md px-5 py-3" />
+            </View>
+          </View>
+          <View className="flex flex-col gap-2 mx-10 mb-10">
+            <View className="flex-row gap-2 items-end">
+              <Text className="text-white">Already a member?</Text>
+              <TouchableWithoutFeedback
+                onPress={(e) => navigation.navigate("Login")}
+              >
+                <Text className="text-[#DDFF94]">Log in</Text>
+              </TouchableWithoutFeedback>
+            </View>
+            <TouchableOpacity
+              className="bg-[#DDFF94] px-5 py-5 flex items-center justify-center rounded-full "
+            >
+              <Text className='text-black'>Sign Up</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </ImageBackground>
     </ScrollView>
   );
 };
