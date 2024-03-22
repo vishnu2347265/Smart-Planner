@@ -182,23 +182,18 @@ app.post("/user/previous-month-tasks", async (req, res) => {
     try {
         const { token } = req.body;
 
-        // Verify the token and decode it to get the user ID
         const decoded = jwt.verify(token, JWT_SECRET);
         const userId = decoded._id;
-        console.log(userId);
 
-        // Calculate date range for the previous month
         const today = new Date();
         const firstDayOfPrevMonth = new Date(today.getFullYear(), today.getMonth() - 1, 1);
         const lastDayOfPrevMonth = new Date(today.getFullYear(), today.getMonth(), 0);
 
-        // If the current month is January, adjust the year
         if (today.getMonth() === 0) {
             firstDayOfPrevMonth.setFullYear(today.getFullYear() - 1);
             lastDayOfPrevMonth.setFullYear(today.getFullYear() - 1);
         }
 
-        // Query tasks for the user within the previous month's date range
         const user = await User.findById(userId).populate({
             path: 'tasks',
             match: {
@@ -209,8 +204,6 @@ app.post("/user/previous-month-tasks", async (req, res) => {
         if (!user) {
             return res.status(404).json({ error: "User not found" });
         }
-
-        // Group tasks by category and count tasks for each category
         const categoryCounts = {};
         user.tasks.forEach(task => {
             if (task.taskCategory in categoryCounts) {
