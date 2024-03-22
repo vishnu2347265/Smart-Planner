@@ -22,7 +22,7 @@ const HomeScreen = ({ navigation, route }) => {
   const [selectedTask, setSelectedTask] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
   const [filterDone, setFilterDone] = useState(false);
-  const [name,setName] = useState("")
+  const [name, setName] = useState("")
   const [completionPercentage, setCompletionPercentage] = useState(0);
   const [taskCategories, setTaskCategories] = useState([
     { name: "Total Tasks", count: 0 },
@@ -41,7 +41,7 @@ const HomeScreen = ({ navigation, route }) => {
         ...route.params.newTask,
         startTime: route.params.newTask.startTime.getTime() // Convert Date to milliseconds since Unix epoch
       };
-      
+
 
       // setTasks(prevTasks => [newTask, ...prevTasks]);
       setRecentTask(newTask);
@@ -117,7 +117,7 @@ const HomeScreen = ({ navigation, route }) => {
     });
   };
 
-  const getData = async()=>{
+  const getData = async () => {
     const token = await AsyncStorage.getItem("token");
     await axios.post("http://10.0.2.2:5001/user/getUser", { token }).then(res => {
       console.log("GET DATA", res.data.data.tasks)
@@ -127,9 +127,9 @@ const HomeScreen = ({ navigation, route }) => {
     })
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     getData()
-  },[])
+  }, [])
 
   useFocusEffect(
     useCallback(() => {
@@ -178,29 +178,22 @@ const HomeScreen = ({ navigation, route }) => {
           <FontAwesomeIcon icon={faSort} size={20} color="white" />
         </TouchableOpacity>
       </View>
-      <ScrollView style={{ flex: 1 }}>
-        {tasks.map((task, index) => (
+    
+      <ScrollView style={{ flex: 1 }} className="gap-5">
+        {tasks.slice().reverse().map((task, index) => (
           <TouchableOpacity
             key={index}
-            style={{
-              backgroundColor: task.completed ? '#808080' : '#FFD700',
-              width: '100%',
-              height: 100,
-              borderRadius: 10,
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginBottom: 10,
-              marginTop: 10,
-              marginHorizontal: 5
-            }}
+            className="flex flex-row rounded-xl bg-[#414040] py-5 px-5 items-center justify-start gap-x-5"
             onPress={() => handleTaskPress(task)}
           >
-            <Text style={{ color: 'black', fontSize: 18 }}>{task.name}</Text>
-            <Text style={{ color: 'black', fontSize: 16 }}>{task.description}</Text>
-            <TouchableOpacity onPress={() => toggleTaskCompletion(index)} style={{ flexDirection: 'row', alignItems: 'center', marginTop: 5 }}>
-              <View style={[styles.radioButton, { backgroundColor: task.completed ? 'green' : 'red' }]} />
-              <Text style={{ color: 'black', marginLeft: 5 }}>{task.completed ? 'Mark as Undone' : 'Mark as Done'}</Text>
-            </TouchableOpacity>
+              <TouchableOpacity onPress={() => toggleTaskCompletion(index)} >
+                <View style={[styles.radioButton, { backgroundColor: task.completed ? '#DDFF94' : 'transparent' }]} />
+                {/* <Text style={{ color: 'black', marginLeft: 5 }}>{task.completed ? 'Mark as Undone' : 'Mark as Done'}</Text> */}
+              </TouchableOpacity>
+            <View>
+              <Text style={{ color: 'white', fontSize: 18 }}>{task.name}</Text>
+              <Text style={{ color: 'white', fontSize: 16 }}>{task.description}</Text>
+            </View>
           </TouchableOpacity>
         ))}
       </ScrollView>
@@ -262,7 +255,7 @@ const styles = StyleSheet.create({
     height: 20,
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: 'black',
+    borderColor: 'white',
     marginRight: 10
   },
   deleteButton: {

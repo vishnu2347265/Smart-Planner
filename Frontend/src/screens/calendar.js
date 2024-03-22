@@ -1,110 +1,84 @@
-// // src/screens/calendar.js
-// import React from 'react';
-// import { Calendar } from 'react-native-calendars';
-// import { View } from 'react-native';
-
-// export default function CalendarScreen({ navigation }) {
-//   return (
-//     <View>
-//       <Calendar
-//         onDayPress={(day) => {
-//           navigation.navigate('Task', { selectedDate: day.dateString });
-//         }}
-//       />
-//     </View>
-//   );
-// }
-
-
-
-
-
-
-
-import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import React, { useCallback, useEffect, useState } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
 import { Agenda } from 'react-native-calendars';
-import hardcodedTasks from './hardcodedTasks'; // Import hardcoded tasks
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
+import { useFocusEffect } from '@react-navigation/native';
 
-const CalendarScreen = ({ navigation, route }) => {
+const CalendarScreen = () => {
   const [items, setItems] = useState({});
-  const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]); // Default to current date
 
-  useEffect(() => {
-    // Update items with hardcoded tasks data
-    updateItems(hardcodedTasks);
-  }, []); // Empty dependency array to run the effect only once
+  const getData = async () => {
+    try {
+      const token = await AsyncStorage.getItem("token");
+      const response = await axios.post("http://10.0.2.2:5001/user/getUser", { token });
+      const tasks = response.data.data.tasks;
+      console.log("TASK", tasks);
 
-  // Function to update the items state with the task data
-  const updateItems = (taskData) => {
-    const tasks = taskData;
-
-    tasks.forEach(task => {
-      const startDate = new Date(task.startTime);
-      const endDate = new Date(task.endTime);
-  
-      // Calculate the number of days the task spans
-      const diffTime = Math.abs(endDate - startDate);
-      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); // Use Math.ceil to include the end day
-  
-      // Loop through the range of dates and add task data
-      for (let i = 0; i < diffDays; i++) {
-        const currentDate = new Date(startDate);
-        currentDate.setDate(startDate.getDate() + i);
-    
-        // Determine if it's the first or last day of the task
-        const isFirstDay = i === 0;
-        const isLastDay = i === diffDays - 1;
-    
-        // For the first day, use the original start time; for the last day, use the original end time
-        const startTime = isFirstDay ? task.startTime.toLocaleTimeString() : '00:00:00';
-        const endTime = isLastDay ? task.endTime.toLocaleTimeString() : '23:59:59';
-    
-        // Add task data for the current date
-        const date = currentDate.toISOString().split('T')[0];
-        setItems((prevItems) => ({
-          ...prevItems,
-          [date]: [
-            ...(prevItems[date] ? prevItems[date] : []),
-            {
-              name: task.name,
-              startTime: task.startTime,
-              endTime: task.endTime,
-            },
-          ],
-        }));
-      }
-    });
+      const updatedItems = {};
+      tasks.forEach(task => {
+        const startDate = new Date(task.startDate).toISOString().split('T')[0];
+        if (!updatedItems[startDate]) {
+          updatedItems[startDate] = [];
+        }
+        updatedItems[startDate].push({
+          name: task.taskName,
+          startTime: task.startTime,
+          endTime: task.endTime,
+        });
+      });
+      setItems(updatedItems);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
   };
 
-
-  // Handle newly created task data passed from AddTaskScreen
   useEffect(() => {
-    if (route.params && route.params.taskData) {
-      const newTaskData = route.params.taskData;
-      updateItems([newTaskData, ...hardcodedTasks]); // Update items with the new task data along with hardcoded tasks
-    }
-  }, [route.params]); // Include route.params in the dependency array
+    getData();
+  }, []);
+
+  useFocusEffect(
+    useCallback(() => {
+      getData();
+    }, [])
+  );
+
+  const formatTime = (timeString) => {
+    const time = new Date(timeString);
+    return time.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+  };
 
   return (
     <View style={{ flex: 1, backgroundColor: 'black' }}>
       <View style={{ position: 'absolute', top: 100, left: 40 }}>
         <Text style={{ color: 'white', fontSize: 24 }}>Calendar</Text>
       </View>
-
       <View style={{ flex: 1, marginTop: 150 }}>
-        {/* Render your calendar component here */}
-        {/* Placeholder for the Agenda component */}
         <Agenda
           items={items}
-          selected={selectedDate}
           renderItem={(item, firstItemInDay) => (
             <View style={styles.card}>
               <Text style={styles.cardTitle}>{item.name}</Text>
-              <Text style={styles.cardText}>Start Time: {new Date(item.startTime).toLocaleTimeString()}</Text>
-              <Text style={styles.cardText}>End Time: {new Date(item.endTime).toLocaleTimeString()}</Text>
+              <Text style={styles.cardText}>Start Time: {formatTime(item.startTime)}</Text>
+              <Text style={styles.cardText}>End Time: {formatTime(item.endTime)}</Text>
             </View>
           )}
+          // renderDay={(day, item = []) => {
+          //   if (!day) return null; // Check if day is undefined
+          //   return (
+          //     <View style={styles.dayContainer}>
+          //       <Text style={styles.day}>{day.day}</Text>
+          //       {items[day.dateString]?.map((task, index) => (
+          //         <View key={index}>
+          //           <Text style={styles.taskName}>{task.name}</Text>
+          //           <Text style={styles.time}>
+          //             {formatTime(task.startTime)} - {formatTime(task.endTime)}
+          //           </Text>
+          //         </View>
+          //       ))}
+          //     </View>
+          //   );
+          // }}
         />
       </View>
     </View>
@@ -132,6 +106,25 @@ const styles = StyleSheet.create({
   cardText: {
     fontSize: 16,
     marginBottom: 4,
+  },
+  dayContainer: {
+    padding: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
+  },
+  day: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  taskName: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 5,
+  },
+  time: {
+    fontSize: 14,
+    color: '#666',
   },
 });
 
