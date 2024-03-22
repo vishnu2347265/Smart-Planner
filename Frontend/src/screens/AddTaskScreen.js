@@ -259,6 +259,7 @@ import { Picker } from '@react-native-picker/picker';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import DatePicker from '@react-native-community/datetimepicker';
 import axios from 'axios'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const AddTaskScreen = ({ navigation, route }) => {
   // State variables
@@ -322,6 +323,7 @@ const AddTaskScreen = ({ navigation, route }) => {
   };
 
   const sendData = async () => {
+    const token = await AsyncStorage.getItem("token");
     const data = {
       categoryName: selectedCategory,
       taskName: selectedTask,
@@ -329,20 +331,23 @@ const AddTaskScreen = ({ navigation, route }) => {
       startDate: startDate,
       endDate: endDate,
       startTime: startTime,
-      endTime: endTime
-    }
-    const token = await AsyncStorage.getItem("token");
-    axios.post('http://10.0.2.2:5001/task/createTask',data).then((res) => {
-      console.log("TASK CREATED")
-      navigation.navigate('Home');
-      setSelectedCategory("")
-      setSelectedTask("")
-      setDescription("")
-      navigation.goBack();
-    }).catch((e) => {
-      console.log(e);
-    });
-  }
+      endTime: endTime,
+      token: token, // Add comma here
+    };
+  
+    axios.post('http://10.0.2.2:5001/task/createTask', data)
+      .then((res) => {
+        console.log("TASK CREATED");
+        navigation.navigate('Home');
+        setSelectedCategory("");
+        setSelectedTask("");
+        setDescription("");
+        navigation.goBack();
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
   // Effect hook to update selected category
   useEffect(() => {
     if (route.params && route.params.selectedCategory) {

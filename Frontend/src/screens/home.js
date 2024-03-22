@@ -5,12 +5,16 @@
 
 
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { View, Text, TouchableOpacity, ScrollView, Modal, StyleSheet } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faBell, faSort, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { CircularProgress } from 'react-native-circular-progress';
+import { useFocusEffect } from '@react-navigation/native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import axios from 'axios'
+import { useDispatch } from 'react-redux';
+import { setToken } from '../slices/AuthSlice';
 
 const HomeScreen = ({ navigation, route }) => {
   const [tasks, setTasks] = useState([]);
@@ -18,6 +22,7 @@ const HomeScreen = ({ navigation, route }) => {
   const [selectedTask, setSelectedTask] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
   const [filterDone, setFilterDone] = useState(false);
+  const [name,setName] = useState("")
   const [completionPercentage, setCompletionPercentage] = useState(0);
   const [taskCategories, setTaskCategories] = useState([
     { name: "Total Tasks", count: 0 },
@@ -27,6 +32,7 @@ const HomeScreen = ({ navigation, route }) => {
     { name: "General", count: 0 }
   ]);
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (route.params && route.params.newTask) {
@@ -37,7 +43,7 @@ const HomeScreen = ({ navigation, route }) => {
       };
       
 
-      setTasks(prevTasks => [newTask, ...prevTasks]);
+      // setTasks(prevTasks => [newTask, ...prevTasks]);
       setRecentTask(newTask);
 
       // Update total tasks count
@@ -111,16 +117,32 @@ const HomeScreen = ({ navigation, route }) => {
     });
   };
 
+  const getData = async()=>{
+    const token = await AsyncStorage.getItem("token");
+    await axios.post("http://10.0.2.2:5001/user/getUser", { token }).then(res => {
+      console.log("GET DATA", res.data.data.tasks)
+      dispatch(setToken({ data: res.data.data }));
+      setName(res.data.data.name)
+      setTasks(res.data.data.tasks);
+    })
+  }
 
-  const token =  AsyncStorage.getItem("token");
-  console.log("USER DATA FROM ASYNC", token)
+  useEffect(()=>{
+    getData()
+  },[])
+
+  useFocusEffect(
+    useCallback(() => {
+      getData();
+    }, [])
+  );
 
 
   return (
     <View style={{ flex: 1, backgroundColor: 'black', borderTopWidth: 0, paddingHorizontal: 30, paddingTop: 80 }}>
       <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
         <View>
-          <Text style={{ color: 'white', fontSize: 24 }}>Hey Alwin 🙋‍♂️</Text>
+          <Text style={{ color: 'white', fontSize: 24 }}>Hey {name} 🙋‍♂️</Text>
         </View>
         <TouchableOpacity onPress={() => console.log("Notification bell icon pressed")} style={{ paddingHorizontal: 8, paddingTop: 30 }}>
           <FontAwesomeIcon icon={faBell} size={20} color="white" />
