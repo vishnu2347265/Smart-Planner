@@ -137,11 +137,13 @@ function Login() {
             </Text>
             <View className="flex flex-col gap-2 items-start w-full pr-10">
               <Text className="font-sans text-white">Email</Text>
-              <TextInput className="border font-semibold text-white border-white focus:border-[#DDFF94] focus:outline-none focus:ring-2 focus:ring-[#DDFF94] w-full rounded-md px-5 py-3" />
+              <TextInput className="border font-semibold text-white border-white focus:border-[#DDFF94] focus:outline-none focus:ring-2 focus:ring-[#DDFF94] w-full rounded-md px-5 py-3" 
+              onChangeText={(e)=>setEmail(e)}/>
             </View>
             <View className="flex flex-col gap-2 items-start w-full pr-10">
               <Text className="font-sans text-white">Password</Text>
-              <TextInput className="border font-semibold text-white border-white focus:border-[#DDFF94] focus:outline-none focus:ring-2 focus:ring-[#DDFF94] w-full rounded-md px-5 py-3" />
+              <TextInput className="border font-semibold text-white border-white focus:border-[#DDFF94] focus:outline-none focus:ring-2 focus:ring-[#DDFF94] w-full rounded-md px-5 py-3"
+              onChangeText={(e)=>setPassword(e)}  />
             </View>
           </View>
           <View className="flex flex-col gap-2 mx-10"
