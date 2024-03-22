@@ -79,9 +79,6 @@
 
 // export default ProfileScreen;
 
-
-
-
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native';
 import { BarChart } from 'react-native-chart-kit';
@@ -149,16 +146,48 @@ const ProfileScreen = ({ navigation }) => {
   };
 
   const handleLeftButtonPress = () => {
-    console.log('Left button pressed');
+    switch (selectedGraph) {
+      case 'previousMonth':
+        setSelectedGraph('general');
+        setGraphHeading('General');
+        break;
+      case 'personal':
+        setSelectedGraph('previousMonth');
+        setGraphHeading(user.bio);
+        break;
+      case 'social':
+        setSelectedGraph('personal');
+        setGraphHeading('Personal');
+        break;
+      case 'general':
+        setSelectedGraph('social');
+        setGraphHeading('Social');
+        break;
+      default:
+        break;
+    }
   };
-  
+
   const handleRightButtonPress = () => {
-    if (selectedGraph === 'previousMonth') {
-      setSelectedGraph('academicsProfession');
-      setGraphHeading('Academics/Profession');
-    } else {
-      setSelectedGraph('previousMonth');
-      setGraphHeading(user.bio);
+    switch (selectedGraph) {
+      case 'previousMonth':
+        setSelectedGraph('personal');
+        setGraphHeading('Personal');
+        break;
+      case 'personal':
+        setSelectedGraph('social');
+        setGraphHeading('Social');
+        break;
+      case 'social':
+        setSelectedGraph('general');
+        setGraphHeading('General');
+        break;
+      case 'general':
+        setSelectedGraph('previousMonth');
+        setGraphHeading(user.bio);
+        break;
+      default:
+        break;
     }
   };
 
@@ -172,32 +201,72 @@ const ProfileScreen = ({ navigation }) => {
       'General': 100,
     };
 
-    // Initialize Academics/Profession data
-    const academicsProfessionData = {
-      'Subject 1': 30,
-      'Subject 2': 40,
-      'Subject 3': 20,
-      'Subject 4': 50,
+    // Initialize data for personal, social, and general graphs
+    const personalData = {
+      'Sleep': 8,
+      'Exercise': 2,
+      'Hobbies': 4,
+      'Self-Care': 3,
     };
 
-    return selectedGraph === 'previousMonth' ? previousMonthData : academicsProfessionData;
+    const socialData = {
+      'Family': 10,
+      'Friends': 8,
+      'Events': 6,
+      'Meetings': 4,
+    };
+
+    const generalData = {
+      'Work': 60,
+      'Study': 20,
+      'Household': 10,
+      'Errands': 10,
+    };
+
+    switch (selectedGraph) {
+      case 'previousMonth':
+        return previousMonthData;
+      case 'personal':
+        return personalData;
+      case 'social':
+        return socialData;
+      case 'general':
+        return generalData;
+      default:
+        return previousMonthData;
+    }
   };
 
   // Get analysis data
   const analysisData = calculateAnalysisData();
 
   // Automated feedback for each category
-  const feedback = selectedGraph === 'previousMonth' ? [
-    `Your efficiency in academic or professional tasks appears to be moderate. Consider allocating more time or effort to these areas for improved performance.`,
-    `You've dedicated a reasonable amount of time to personal activities. Keep maintaining a healthy balance between personal and other aspects of your life.`,
-    `Your social engagement seems to be quite active, reflecting a good level of social interaction. Continue nurturing your social connections.`,
-    `A significant portion of your time is spent on general tasks. Consider prioritizing tasks or organizing your activities more efficiently to optimize productivity.`,
-  ] : [
-    `Your performance in academic subjects seems promising.`,
-    `You have shown consistent effort in subject-related activities.`,
-    `Continue focusing on your academic pursuits for better results.`,
-    `Consider seeking additional resources or support for subjects where you need improvement.`,
-  ];
+  const feedback = {
+    'previousMonth': [
+      `Your efficiency in academic or professional tasks appears to be moderate. Consider allocating more time or effort to these areas for improved performance.`,
+      `You've dedicated a reasonable amount of time to personal activities. Keep maintaining a healthy balance between personal and other aspects of your life.`,
+      `Your social engagement seems to be quite active, reflecting a good level of social interaction. Continue nurturing your social connections.`,
+      `A significant portion of your time is spent on general tasks. Consider prioritizing tasks or organizing your activities more efficiently to optimize productivity.`,
+    ],
+    'personal': [
+      `Your sleep duration seems adequate.`,
+      `Consider increasing your exercise time for better health.`,
+      `You're spending a good amount of time on your hobbies.`,
+      `Maintaining self-care routines is crucial for overall well-being. Keep up the good work!`,
+    ],
+    'social': [
+      `Maintaining a healthy relationship with family is important.`,
+      `Nurturing friendships is essential for social well-being.`,
+      `Attending events can be refreshing and beneficial.`,
+      `Balancing meetings with other activities is key for time management.`,
+    ],
+    'general': [
+      `Your work engagement seems substantial.`,
+      `Dedicate enough time to your studies for better academic performance.`,
+      `Keeping up with household chores is important for a tidy environment.`,
+      `Efficiently completing errands is essential for daily life.`,
+    ],
+  };
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -248,8 +317,8 @@ const ProfileScreen = ({ navigation }) => {
 
       {/* Feedback for each category */}
       <View style={styles.feedbackContainer}>
-        {Object.keys(analysisData).map((category, index) => (
-          <Text key={index} style={styles.feedbackText}>{`${category}: ${feedback[index]}`}</Text>
+        {feedback[selectedGraph].map((text, index) => (
+          <Text key={index} style={styles.feedbackText}>{text}</Text>
         ))}
       </View>
     </ScrollView>
@@ -311,3 +380,4 @@ const styles = StyleSheet.create({
 });
 
 export default ProfileScreen;
+
