@@ -16,6 +16,7 @@ import FontAwesome from "react-native-vector-icons/FontAwesome";
 import axios from "axios";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import { widthPercentageToDP } from "react-native-responsive-screen";
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 function Login() {
   const navigation = useNavigation();
@@ -29,11 +30,13 @@ function Login() {
       password,
     };
     axios
-      .post("http://10.0.2.2:5001/login-user", userData)
+      .post("http://10.0.2.2:5001/auth/login-user", userData)
       .then((res) => {
         console.log(res.data);
         if (res.data.status == "ok") {
           Alert.alert("logged in successful");
+          AsyncStorage.setItem("token", res.data.data);
+          AsyncStorage.setItem("isLoggedIn", JSON.stringify(true));
           navigation.navigate("Tab");
         }
       })
@@ -128,8 +131,10 @@ function Login() {
           </View>
         </View>
       </View> */}
-      <ImageBackground className='flex-1'
-      source={require('../assets/loginBG-3.png')}>
+      <ImageBackground
+        className="flex-1"
+        source={require("../assets/loginBG-3.png")}
+      >
         <View className=" h-full justify-between">
           <View className="flex flex-1 flex-col  px-10 pt-52 items-start gap-5">
             <Text className="font-sans text-white text-3xl font-bold pb-10">
@@ -137,15 +142,22 @@ function Login() {
             </Text>
             <View className="flex flex-col gap-2 items-start w-full pr-10">
               <Text className="font-sans text-white">Email</Text>
-              <TextInput className="border font-semibold text-white border-white focus:border-[#DDFF94] focus:outline-none focus:ring-2 focus:ring-[#DDFF94] w-full rounded-md px-5 py-3"/>
+              <TextInput
+                onChangeText={(e) => setEmail(e)}
+                className="border font-semibold text-white border-white focus:border-[#DDFF94] focus:outline-none focus:ring-2 focus:ring-[#DDFF94] w-full rounded-md px-5 py-3"
+             />
             </View>
             <View className="flex flex-col gap-2 items-start w-full pr-10">
               <Text className="font-sans text-white">Password</Text>
-              <TextInput className="border font-semibold text-white border-white focus:border-[#DDFF94] focus:outline-none focus:ring-2 focus:ring-[#DDFF94] w-full rounded-md px-5 py-3"/>
+              <TextInput
+                onChangeText={(e) => setPassword(e)}
+                className="border font-semibold text-white border-white focus:border-[#DDFF94] focus:outline-none focus:ring-2 focus:ring-[#DDFF94] w-full rounded-md px-5 py-3"
+              />
             </View>
           </View>
-          <View className="flex flex-col gap-2 mx-10"
-          style={{paddingBottom: widthPercentageToDP("20%")}}
+          <View
+            className="flex flex-col gap-2 mx-10"
+            style={{ paddingBottom: widthPercentageToDP("20%") }}
           >
             <View className="flex-row gap-2 items-end">
               <Text className="text-white">Don't have an account?</Text>
@@ -156,10 +168,11 @@ function Login() {
               </TouchableWithoutFeedback>
             </View>
             <TouchableOpacity
-            onPress={()=>navigation.navigate("Tab")}
-            className="bg-[#DDFF94] px-5 py-5 flex items-center justify-center rounded-full "
+              // onPress={()=>navigation.navigate("Tab")}
+              onPress={handleSubmit}
+              className="bg-[#DDFF94] px-5 py-5 flex items-center justify-center rounded-full "
             >
-              <Text className='text-black'>Login</Text>
+              <Text className="text-black">Login</Text>
             </TouchableOpacity>
           </View>
         </View>

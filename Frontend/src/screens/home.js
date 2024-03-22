@@ -10,6 +10,7 @@ import { View, Text, TouchableOpacity, ScrollView, Modal, StyleSheet } from 'rea
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faBell, faSort, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { CircularProgress } from 'react-native-circular-progress';
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const HomeScreen = ({ navigation, route }) => {
   const [tasks, setTasks] = useState([]);
@@ -109,6 +110,10 @@ const HomeScreen = ({ navigation, route }) => {
       });
     });
   };
+
+
+  const token =  AsyncStorage.getItem("token");
+  console.log("USER DATA FROM ASYNC", token)
 
 
   return (
