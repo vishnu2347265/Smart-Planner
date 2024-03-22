@@ -10,6 +10,8 @@ import Calendar from './src/screens/calendar';
 import AddTaskScreen from './src/screens/AddTaskScreen'; // Import AddTaskScreen
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faHome, faTasks, faUser, faCalendarAlt, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { Provider } from 'react-redux';
+import { store } from './store';
 
 const Tab = createBottomTabNavigator();
 
@@ -17,9 +19,11 @@ const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Navigation/>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <Navigation />
+      </NavigationContainer>
+    </Provider>
   );
 }
 
