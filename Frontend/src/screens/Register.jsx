@@ -216,23 +216,23 @@ function Register() {
       source={require('../assets/loginBG-3.png')}>
         <View className=" h-full justify-between">
           <View className="flex flex-1 flex-col px-10 py-20 items-start gap-5">
-            <Text className="font-sans text-white text-3xl font-bold pb-10">
+            <Text className=" text-white text-3xl font-bold pb-10">
             Create an account to take control of your day{" "}
             </Text>
             <View className="flex flex-col gap-2 items-start w-full pr-10">
-              <Text className="font-sans text-white">Name</Text>
+              <Text className=" text-white" onChange={e => handleName(e)}>Name</Text>
               <TextInput className="border font-semibold text-white border-white focus:border-[#DDFF94] focus:outline-none focus:ring-2 focus:ring-[#DDFF94] w-full rounded-md px-5 py-3" />
             </View>
             <View className="flex flex-col gap-2 items-start w-full pr-10">
-              <Text className="font-sans text-white">Email</Text>
+              <Text className=" text-white">Email</Text>
               <TextInput className="border font-semibold text-white border-white focus:border-[#DDFF94] focus:outline-none focus:ring-2 focus:ring-[#DDFF94] w-full rounded-md px-5 py-3" />
             </View>
             <View className="flex flex-col gap-2 items-start w-full pr-10">
-              <Text className="font-sans text-white">Password</Text>
+              <Text className=" text-white">Password</Text>
               <TextInput className="border font-semibold text-white border-white focus:border-[#DDFF94] focus:outline-none focus:ring-2 focus:ring-[#DDFF94] w-full rounded-md px-5 py-3" />
             </View>
             <View className="flex flex-col gap-2 items-start w-full pr-10">
-              <Text className="font-sans text-white">Password</Text>
+              <Text className=" text-white">Password</Text>
               <TextInput className="border font-semibold text-white border-white focus:border-[#DDFF94] focus:outline-none focus:ring-2 focus:ring-[#DDFF94] w-full rounded-md px-5 py-3" />
             </View>
           </View>

@@ -5,7 +5,7 @@ import {
   widthPercentageToDP,
   widthPercentageToDP as wp,
 } from "react-native-responsive-screen";
-import Graph from "../components/graph";
+import Graph from "../components/Graph";
 
 const ProfileScreen = () => {
   // Dummy user data for testing
@@ -43,7 +43,6 @@ const ProfileScreen = () => {
         className="px-20 shadow rounded-lg"
         // style={{ width: wp("90%")}}
       >
-      <Graph/>
       <Graph/>
       </View>
     </View>

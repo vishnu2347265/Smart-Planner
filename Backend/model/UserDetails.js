@@ -6,6 +6,10 @@ const UserDetailSchema = new mongoose.Schema(
         email : { type : String, unique : true},
         phone : String,
         password : String,
+        tasks:{
+            type:mongoose.Schema.Types.ObjectId,
+            ref:'Task'
+        }
     },
     {
         collection : "UserInfo",

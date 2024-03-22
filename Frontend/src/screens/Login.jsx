@@ -15,6 +15,7 @@ import {
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import axios from "axios";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import { widthPercentageToDP } from "react-native-responsive-screen";
 
 function Login() {
   const navigation = useNavigation();
@@ -130,7 +131,7 @@ function Login() {
       <ImageBackground className='flex-1'
       source={require('../assets/loginBG-3.png')}>
         <View className=" h-full justify-between">
-          <View className="flex flex-1 flex-col  px-10 py-52 items-start gap-5">
+          <View className="flex flex-1 flex-col  px-10 pt-52 items-start gap-5">
             <Text className="font-sans text-white text-3xl font-bold pb-10">
               Log in to start managing your tasks easily{" "}
             </Text>
@@ -143,7 +144,9 @@ function Login() {
               <TextInput className="border font-semibold text-white border-white focus:border-[#DDFF94] focus:outline-none focus:ring-2 focus:ring-[#DDFF94] w-full rounded-md px-5 py-3" />
             </View>
           </View>
-          <View className="flex flex-col gap-2 mx-10 mb-10">
+          <View className="flex flex-col gap-2 mx-10"
+          style={{paddingBottom: widthPercentageToDP("20%")}}
+          >
             <View className="flex-row gap-2 items-end">
               <Text className="text-white">Don't have an account?</Text>
               <TouchableWithoutFeedback
