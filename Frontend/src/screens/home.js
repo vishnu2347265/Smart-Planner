@@ -22,7 +22,7 @@ const HomeScreen = ({ navigation, route }) => {
   const [selectedTask, setSelectedTask] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
   const [filterDone, setFilterDone] = useState(false);
-  const [name,setName] = useState("")
+  const [name, setName] = useState("")
   const [completionPercentage, setCompletionPercentage] = useState(0);
   const [taskCategories, setTaskCategories] = useState([
     { name: "Total Tasks", count: 0 },
@@ -41,7 +41,7 @@ const HomeScreen = ({ navigation, route }) => {
         ...route.params.newTask,
         startTime: route.params.newTask.startTime.getTime() // Convert Date to milliseconds since Unix epoch
       };
-      
+
 
       // setTasks(prevTasks => [newTask, ...prevTasks]);
       setRecentTask(newTask);
@@ -117,7 +117,7 @@ const HomeScreen = ({ navigation, route }) => {
     });
   };
 
-  const getData = async()=>{
+  const getData = async () => {
     const token = await AsyncStorage.getItem("token");
     await axios.post("http://10.0.2.2:5001/user/getUser", { token }).then(res => {
       console.log("GET DATA", res.data.data.tasks)
@@ -127,9 +127,9 @@ const HomeScreen = ({ navigation, route }) => {
     })
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     getData()
-  },[])
+  }, [])
 
   useFocusEffect(
     useCallback(() => {
@@ -183,7 +183,7 @@ const HomeScreen = ({ navigation, route }) => {
           <TouchableOpacity
             key={index}
             style={{
-              backgroundColor: task.completed ? '#808080' : '#FFD700',
+              backgroundColor: '#292929',
               width: '100%',
               height: 100,
               borderRadius: 10,
@@ -191,16 +191,22 @@ const HomeScreen = ({ navigation, route }) => {
               justifyContent: 'center',
               marginBottom: 10,
               marginTop: 10,
-              marginHorizontal: 5
+              marginHorizontal: 5,
+              borderColor: '#DDFF94', borderWidth: 1
             }}
-            onPress={() => handleTaskPress(task)}
+            onPress={() => console.log('inside card')}
           >
-            <Text style={{ color: 'black', fontSize: 18 }}>{task.name}</Text>
-            <Text style={{ color: 'black', fontSize: 16 }}>{task.description}</Text>
-            <TouchableOpacity onPress={() => toggleTaskCompletion(index)} style={{ flexDirection: 'row', alignItems: 'center', marginTop: 5 }}>
-              <View style={[styles.radioButton, { backgroundColor: task.completed ? 'green' : 'red' }]} />
-              <Text style={{ color: 'black', marginLeft: 5 }}>{task.completed ? 'Mark as Undone' : 'Mark as Done'}</Text>
-            </TouchableOpacity>
+            <View style={{ flexDirection: 'row-reverse' }}>
+              <View>
+                {/* <Text style={{ color: 'white', fontSize: 20 ,fontWeight:'bold'}}>{task.name}</Text> */}
+                <Text style={{ color: 'white', fontSize: 20, fontWeight: '500', textDecorationLine: task.completed ? 'line-through' : 'none' }}>{task.description}</Text>
+              </View>
+              <TouchableOpacity onPress={() => toggleTaskCompletion(index)} style={{ flexDirection: 'row', alignItems: 'center', marginTop: 5 }}>
+                <View style={[styles.radioButton, { backgroundColor: task.completed ? '#DDFF94' : '#292929' }]} />
+                {/* <Text style={{ color: 'white', marginLeft: 5 }}>{task.completed ? 'Mark as Undone' : 'Mark as Done'}</Text> */}
+              </TouchableOpacity>
+            </View>
+
           </TouchableOpacity>
         ))}
       </ScrollView>
@@ -262,7 +268,7 @@ const styles = StyleSheet.create({
     height: 20,
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: 'black',
+    borderColor: 'white',
     marginRight: 10
   },
   deleteButton: {
