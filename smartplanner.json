@@ -1,0 +1,443 @@
+[
+  {
+    "categoryName": "Academics/Profession",
+    "taskName": "Homework/Assignments",
+    "description": "Complete math assignment",
+    "startDate": "2024-03-22",
+    "endDate": "2024-03-22",
+    "startTime": "09:00",
+    "endTime": "10:00"
+  },
+  {
+    "categoryName": "Personal",
+    "taskName": "Fitness/Health",
+    "description": "Morning jog",
+    "startDate": "2024-03-22",
+    "endDate": "2024-03-22",
+    "startTime": "07:00",
+    "endTime": "08:00"
+  },
+  {
+    "categoryName": "Social",
+    "taskName": "Meetings",
+    "description": "Team meeting",
+    "startDate": "2024-03-22",
+    "endDate": "2024-03-22",
+    "startTime": "14:00",
+    "endTime": "15:00"
+  },
+  {
+    "categoryName": "General",
+    "taskName": "Reminders",
+    "description": "Buy groceries",
+    "startDate": "2024-03-22",
+    "endDate": "2024-03-22",
+    "startTime": "16:00",
+    "endTime": "17:00"
+  },
+  {
+    "categoryName": "Academics/Profession",
+    "taskName": "Study Sessions",
+    "description": "Study for upcoming exam",
+    "startDate": "2024-03-23",
+    "endDate": "2024-03-23",
+    "startTime": "10:00",
+    "endTime": "12:00"
+  },
+  {
+    "categoryName": "Personal",
+    "taskName": "Career/Internship",
+    "description": "Update resume",
+    "startDate": "2024-03-23",
+    "endDate": "2024-03-23",
+    "startTime": "13:00",
+    "endTime": "14:00"
+  },
+  {
+    "categoryName": "Social",
+    "taskName": "Extracurricular Activities",
+    "description": "Attend soccer practice",
+    "startDate": "2024-03-23",
+    "endDate": "2024-03-23",
+    "startTime": "16:00",
+    "endTime": "18:00"
+  },
+  {
+    "categoryName": "General",
+    "taskName": "Travel Plans",
+    "description": "Book flight tickets",
+    "startDate": "2024-03-23",
+    "endDate": "2024-03-23",
+    "startTime": "20:00",
+    "endTime": "21:00"
+  },
+  {
+    "categoryName": "Academics/Profession",
+    "taskName": "Exams/Tests",
+    "description": "Prepare for biology exam",
+    "startDate": "2024-03-22",
+    "endDate": "2024-03-22",
+    "startTime": "18:00",
+    "endTime": "20:00"
+  },
+  {
+    "categoryName": "Personal",
+    "taskName": "Custom",
+    "description": "Write in journal",
+    "startDate": "2024-03-22",
+    "endDate": "2024-03-22",
+    "startTime": "21:00",
+    "endTime": "22:00"
+  },
+  {
+    "categoryName": "Social",
+    "taskName": "Social Events",
+    "description": "Attend friend's birthday party",
+    "startDate": "2024-03-22",
+    "endDate": "2024-03-22",
+    "startTime": "19:00",
+    "endTime": "23:00"
+  },
+  {
+    "categoryName": "General",
+    "taskName": "Custom",
+    "description": "Update budget spreadsheet",
+    "startDate": "2024-03-22",
+    "endDate": "2024-03-22",
+    "startTime": "15:00",
+    "endTime": "16:00"
+  },
+  {
+    "categoryName": "Academics/Profession",
+    "taskName": "Projects",
+    "description": "Work on group project",
+    "startDate": "2024-03-23",
+    "endDate": "2024-03-23",
+    "startTime": "09:00",
+    "endTime": "12:00"
+  },
+  {
+    "categoryName": "Personal",
+    "taskName": "Custom",
+    "description": "Practice guitar",
+    "startDate": "2024-03-23",
+    "endDate": "2024-03-23",
+    "startTime": "14:00",
+    "endTime": "15:00"
+  },
+  {
+    "categoryName": "Social",
+    "taskName": "Extracurricular Activities",
+    "description": "Volunteer at local animal shelter",
+    "startDate": "2024-03-23",
+    "endDate": "2024-03-23",
+    "startTime": "16:00",
+    "endTime": "18:00"
+  },
+  {
+    "categoryName": "General",
+    "taskName": "Sleep/Rest",
+    "description": "Take a nap",
+    "startDate": "2024-03-23",
+    "endDate": "2024-03-23",
+    "startTime": "13:00",
+    "endTime": "14:00"
+  },
+  {
+    "categoryName": "Academics/Profession",
+    "taskName": "Custom",
+    "description": "Research for term paper",
+    "startDate": "2024-03-24",
+    "endDate": "2024-03-24",
+    "startTime": "10:00",
+    "endTime": "12:00"
+  },
+  {
+    "categoryName": "Personal",
+    "taskName": "Custom",
+    "description": "Meditation session",
+    "startDate": "2024-03-24",
+    "endDate": "2024-03-24",
+    "startTime": "08:00",
+    "endTime": "08:30"
+  },
+  {
+    "categoryName": "Social",
+    "taskName": "Custom",
+    "description": "Meet friends for coffee",
+    "startDate": "2024-03-24",
+    "endDate": "2024-03-24",
+    "startTime": "15:00",
+    "endTime": "16:00"
+  },
+  {
+    "categoryName": "General",
+    "taskName": "Custom",
+    "description": "Read a book",
+    "startDate": "2024-03-24",
+    "endDate": "2024-03-24",
+    "startTime": "19:00",
+    "endTime": "20:00"
+  },
+  {
+    "categoryName": "Academics/Profession",
+    "taskName": "Custom",
+    "description": "Attend workshop on data analysis",
+    "startDate": "2024-03-25",
+    "endDate": "2024-03-25",
+    "startTime": "14:00",
+    "endTime": "16:00"
+  },
+  {
+    "categoryName": "Personal",
+    "taskName": "Custom",
+    "description": "Cook dinner",
+    "startDate": "2024-03-25",
+    "endDate": "2024-03-25",
+    "startTime": "18:00",
+    "endTime": "19:00"
+  },
+  {
+    "categoryName": "Social",
+    "taskName": "Custom",
+    "description": "Attend book club meeting",
+    "startDate": "2024-03-25",
+    "endDate": "2024-03-25",
+    "startTime": "19:00",
+    "endTime": "21:00"
+  },
+  {
+    "categoryName": "General",
+    "taskName": "Custom",
+    "description": "Water the plants",
+    "startDate": "2024-03-25",
+    "endDate": "2024-03-25",
+    "startTime": "10:00",
+    "endTime": "10:30"
+  },
+  {
+    "categoryName": "Academics/Profession",
+    "taskName": "Custom",
+    "description": "Write research paper",
+    "startDate": "2024-03-26",
+    "endDate": "2024-03-26",
+    "startTime": "11:00",
+    "endTime": "13:00"
+  },
+  {
+    "categoryName": "Personal",
+    "taskName": "Custom",
+    "description": "Yoga session",
+    "startDate": "2024-03-26",
+    "endDate": "2024-03-26",
+    "startTime": "09:00",
+    "endTime": "10:00"
+  },
+  {
+    "categoryName": "Social",
+    "taskName": "Custom",
+    "description": "Game night with friends",
+    "startDate": "2024-03-26",
+    "endDate": "2024-03-26",
+    "startTime": "20:00",
+    "endTime": "22:00"
+  },
+  {
+    "categoryName": "General",
+    "taskName": "Custom",
+    "description": "Update software",
+    "startDate": "2024-03-26",
+    "endDate": "2024-03-26",
+    "startTime": "16:00",
+    "endTime": "17:00"
+  },
+  {
+    "categoryName": "Academics/Profession",
+    "taskName": "Custom",
+    "description": "Write code for project",
+    "startDate": "2024-03-27",
+    "endDate": "2024-03-27",
+    "startTime": "10:00",
+    "endTime": "12:00"
+  },
+  {
+    "categoryName": "Personal",
+    "taskName": "Custom",
+    "description": "Write blog post",
+    "startDate": "2024-03-27",
+    "endDate": "2024-03-27",
+    "startTime": "14:00",
+    "endTime": "16:00"
+  },
+  {
+    "categoryName": "Social",
+    "taskName": "Custom",
+    "description": "Attend art exhibition",
+    "startDate": "2024-03-27",
+    "endDate": "2024-03-27",
+    "startTime": "17:00",
+    "endTime": "19:00"
+  },
+  {
+    "categoryName": "General",
+    "taskName": "Custom",
+    "description": "Organize files",
+    "startDate": "2024-03-27",
+    "endDate": "2024-03-27",
+    "startTime": "20:00",
+    "endTime": "21:00"
+  },
+  {
+    "categoryName": "Academics/Profession",
+    "taskName": "Custom",
+    "description": "Review literature",
+    "startDate": "2024-03-28",
+    "endDate": "2024-03-28",
+    "startTime": "09:00",
+    "endTime": "11:00"
+  },
+  {
+    "categoryName": "Personal",
+    "taskName": "Custom",
+    "description": "Go for a walk",
+    "startDate": "2024-03-28",
+    "endDate": "2024-03-28",
+    "startTime": "12:00",
+    "endTime": "13:00"
+  },
+  {
+    "categoryName": "Social",
+    "taskName": "Custom",
+    "description": "Attend charity event",
+    "startDate": "2024-03-28",
+    "endDate": "2024-03-28",
+    "startTime": "15:00",
+    "endTime": "17:00"
+  },
+  {
+    "categoryName": "General",
+    "taskName": "Custom",
+    "description": "Update software",
+    "startDate": "2024-03-28",
+    "endDate": "2024-03-28",
+    "startTime": "19:00",
+    "endTime": "21:00"
+  },
+  {
+    "categoryName": "Academics/Profession",
+    "taskName": "Custom",
+    "description": "Attend webinar",
+    "startDate": "2024-03-29",
+    "endDate": "2024-03-29",
+    "startTime": "13:00",
+    "endTime": "15:00"
+  },
+  {
+    "categoryName": "Personal",
+    "taskName": "Custom",
+    "description": "Read a book",
+    "startDate": "2024-03-29",
+    "endDate": "2024-03-29",
+    "startTime": "16:00",
+    "endTime": "18:00"
+  },
+  {
+    "categoryName": "Social",
+    "taskName": "Custom",
+    "description": "Go to movie night",
+    "startDate": "2024-03-29",
+    "endDate": "2024-03-29",
+    "startTime": "20:00",
+    "endTime": "23:00"
+  },
+  {
+    "categoryName": "General",
+    "taskName": "Custom",
+    "description": "Call family",
+    "startDate": "2024-03-29",
+    "endDate": "2024-03-29",
+    "startTime": "19:00",
+    "endTime": "20:00"
+  },
+  {
+    "categoryName": "Academics/Profession",
+    "taskName": "Custom",
+    "description": "Prepare presentation",
+    "startDate": "2024-03-30",
+    "endDate": "2024-03-30",
+    "startTime": "09:00",
+    "endTime": "11:00"
+  },
+  {
+    "categoryName": "Personal",
+    "taskName": "Custom",
+    "description": "Plan weekend activities",
+    "startDate": "2024-03-30",
+    "endDate": "2024-03-30",
+    "startTime": "12:00",
+    "endTime": "14:00"
+  },
+  {
+    "categoryName": "Social",
+    "taskName": "Custom",
+    "description": "Have dinner with friends",
+    "startDate": "2024-03-30",
+    "endDate": "2024-03-30",
+    "startTime": "19:00",
+    "endTime": "21:00"
+  },
+  {
+    "categoryName": "General",
+    "taskName": "Custom",
+    "description": "Organize workspace",
+    "startDate": "2024-03-30",
+    "endDate": "2024-03-30",
+    "startTime": "15:00",
+    "endTime": "17:00"
+  },
+  {
+    "categoryName": "Academics/Profession",
+    "taskName": "Custom",
+    "description": "Attend conference",
+    "startDate": "2024-03-31",
+    "endDate": "2024-03-31",
+    "startTime": "10:00",
+    "endTime": "12:00"
+  },
+  {
+    "categoryName": "Personal",
+    "taskName": "Custom",
+    "description": "Practice painting",
+    "startDate": "2024-03-31",
+    "endDate": "2024-03-31",
+    "startTime": "13:00",
+    "endTime": "15:00"
+  },
+  {
+    "categoryName": "Social",
+    "taskName": "Custom",
+    "description": "Attend music concert",
+    "startDate": "2024-03-31",
+    "endDate": "2024-03-31",
+    "startTime": "17:00",
+    "endTime": "20:00"
+  },
+  {
+    "categoryName": "General",
+    "taskName": "Custom",
+    "description": "Pay bills",
+    "startDate": "2024-03-31",
+    "endDate": "2024-03-31",
+    "startTime": "21:00",
+    "endTime": "22:00"
+  },
+  {
+    "categoryName": "Academics/Profession",
+    "taskName": "Custom",
+    "description": "Review code",
+    "startDate": "2024-04-01",
+    "endDate": "2024-04-01",
+    "startTime": "08:00",
+    "endTime": "10:00"
+  }
+]
