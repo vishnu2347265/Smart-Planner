@@ -2,10 +2,9 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 app.use(express.json());
-const bcrypt = require("bcryptjs");
-const jwt = require('jsonwebtoken');
 const taskRoutes = require('./routes/task');
 const authRoutes = require('./routes/auth');
+const userRoutes = require('./routes/user');
 
 const mongoUrl = "mongodb+srv://admin:admin@cluster0.njeb9m7.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 
@@ -28,6 +27,7 @@ app.get("/", (req, res) => {
 
 app.use('/task', taskRoutes);
 app.use('/auth', authRoutes);
+app.use('/user', userRoutes);
 
 app.post('/add-new-task/:userId', async (req, res) => {
     try {

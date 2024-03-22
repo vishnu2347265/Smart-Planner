@@ -16,7 +16,7 @@ import FontAwesome from "react-native-vector-icons/FontAwesome";
 import axios from "axios";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import { widthPercentageToDP } from "react-native-responsive-screen";
-import AsyncStorage from '@react-native-async-storage/async-storage'
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 function Login() {
   const navigation = useNavigation();
@@ -33,11 +33,19 @@ function Login() {
       .post("http://10.0.2.2:5001/auth/login-user", userData)
       .then((res) => {
         console.log(res.data);
-        if (res.data.status == "ok") {
-          Alert.alert("logged in successful");
-          AsyncStorage.setItem("token", res.data.data);
-          AsyncStorage.setItem("isLoggedIn", JSON.stringify(true));
-          navigation.navigate("Tab");
+        if (res.data.status === "ok") {
+          // Save token to async storage and navigate to home page
+          AsyncStorage.setItem("token", res.data.data)
+            .then(() => {
+              navigation.navigate("Tab");
+            })
+            .catch((error) => {
+              console.error("Error saving token to async storage:", error);
+              Alert.alert(
+                "Token saving failed",
+                "An error occurred while saving token. Please try again later."
+              );
+            });
         }
       })
       .catch((error) => {
@@ -137,18 +145,18 @@ function Login() {
       >
         <View className=" h-full justify-between">
           <View className="flex flex-1 flex-col  px-10 pt-52 items-start gap-5">
-            <Text className="font-sans text-white text-3xl font-bold pb-10">
+            <Text className=" text-white text-3xl font-bold pb-10">
               Log in to start managing your tasks easily{" "}
             </Text>
             <View className="flex flex-col gap-2 items-start w-full pr-10">
-              <Text className="font-sans text-white">Email</Text>
+              <Text className=" text-white">Email</Text>
               <TextInput
                 onChangeText={(e) => setEmail(e)}
                 className="border font-semibold text-white border-white focus:border-[#DDFF94] focus:outline-none focus:ring-2 focus:ring-[#DDFF94] w-full rounded-md px-5 py-3"
               />
             </View>
             <View className="flex flex-col gap-2 items-start w-full pr-10">
-              <Text className="font-sans text-white">Password</Text>
+              <Text className=" text-white">Password</Text>
               <TextInput
                 onChangeText={(e) => setPassword(e)}
                 className="border font-semibold text-white border-white focus:border-[#DDFF94] focus:outline-none focus:ring-2 focus:ring-[#DDFF94] w-full rounded-md px-5 py-3"

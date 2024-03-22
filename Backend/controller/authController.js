@@ -26,20 +26,27 @@ exports.register = async (req, res) => {
 
 
 exports.login = async (req, res) => {
-    const {email,password} = req.body;
-    console.log("email",email,password)
-    const oldUser = await User.findOne({ email: email });
-    if (!oldUser) {
-        return res.send({ data: "User doesn't exist!!" });
-    }
-    if (await bcrypt.compare(password, oldUser.password)) {
-        const token = jwt.sign({ email: oldUser.email }, JWT_SECRET);
-        console.log(token);
-        if (res.status(201)) {
-            return res.send({ status: "ok", data: token});
+    const { email, password } = req.body;
+    try {
+        const data = await User.findOne({ email: email });
+        if (data) {
+            bcrypt.compare(password, data.password, (err, result) => {
+                if (err) {
+                    res.status(500).json("An error occurred");
+                }
+                if (result) {
+                    const token = jwt.sign({ _id: data._id }, JWT_SECRET);
+                    console.log(token)
+                    res.send({ status: "ok", data: token });
+                } else {
+                    res.json("Incorrect password");
+                }
+            });
+        } else {
+            res.json("No user found");
         }
-        else {
-            return res.send({ error: "error" });
-        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).send("An error occurred");
     }
-}
+};
