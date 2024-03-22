@@ -136,7 +136,14 @@ const HomeScreen = ({ navigation, route }) => {
       getData();
     }, [])
   );
-
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = date.getDate();
+    const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    const month = monthNames[date.getMonth()];
+    const year = date.getFullYear();
+    return `${day} ${month} ${year}`;
+  };
 
   return (
     <View style={{ flex: 1, backgroundColor: 'black', borderTopWidth: 0, paddingHorizontal: 30, paddingTop: 80 }}>
@@ -184,22 +191,28 @@ const HomeScreen = ({ navigation, route }) => {
             key={index}
             style={{
               backgroundColor: '#292929',
-              width: '100%',
+              width: '97%',
               height: 100,
               borderRadius: 10,
-              alignItems: 'center',
+              alignItems: 'flex-start',
               justifyContent: 'center',
               marginBottom: 10,
               marginTop: 10,
               marginHorizontal: 5,
-              borderColor: '#DDFF94', borderWidth: 1
+              borderColor: '#DDFF94', borderWidth: 1,
+              margin: 10, padding: 10
             }}
-            onPress={() => console.log('inside card')}
+            onPress={() => console.log(task.endDate)}
           >
             <View style={{ flexDirection: 'row-reverse' }}>
               <View>
-                {/* <Text style={{ color: 'white', fontSize: 20 ,fontWeight:'bold'}}>{task.name}</Text> */}
+
                 <Text style={{ color: 'white', fontSize: 20, fontWeight: '500', textDecorationLine: task.completed ? 'line-through' : 'none' }}>{task.description}</Text>
+                <Text style={{ color: 'white', fontSize: 15, fontWeight: '200', textDecorationLine: task.completed ? 'line-through' : 'none' }}>{task.categoryName}</Text>
+                <Text style={{ color: 'white', fontSize: 15, fontWeight: '200', textDecorationLine: task.completed ? 'line-through' : 'none' }}>{task.taskName}</Text>
+                {/* <View style={{ backgroundColor: '#FFD700', padding: 5, borderRadius: 5 }}>
+                  <Text style={{ color: 'black', fontSize: 20, fontWeight: 'bold' }}>{formatDate(task.endDate)}</Text>
+                </View> */}
               </View>
               <TouchableOpacity onPress={() => toggleTaskCompletion(index)} style={{ flexDirection: 'row', alignItems: 'center', marginTop: 5 }}>
                 <View style={[styles.radioButton, { backgroundColor: task.completed ? '#DDFF94' : '#292929' }]} />
