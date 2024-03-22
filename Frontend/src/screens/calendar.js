@@ -1,25 +1,3 @@
-// // src/screens/calendar.js
-// import React from 'react';
-// import { Calendar } from 'react-native-calendars';
-// import { View } from 'react-native';
-
-// export default function CalendarScreen({ navigation }) {
-//   return (
-//     <View>
-//       <Calendar
-//         onDayPress={(day) => {
-//           navigation.navigate('Task', { selectedDate: day.dateString });
-//         }}
-//       />
-//     </View>
-//   );
-// }
-
-
-
-
-
-
 
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Button } from 'react-native';
@@ -67,7 +45,7 @@ const CalendarScreen = ({ navigation, route }) => {
           [date]: [
             ...(prevItems[date] ? prevItems[date] : []),
             {
-              name: task.name,
+              category: task.category, // Use category name instead of task name
               startTime: task.startTime,
               endTime: task.endTime,
             },
@@ -100,7 +78,7 @@ const CalendarScreen = ({ navigation, route }) => {
           selected={selectedDate}
           renderItem={(item, firstItemInDay) => (
             <View style={styles.card}>
-              <Text style={styles.cardTitle}>{item.name}</Text>
+              <Text style={styles.cardTitle}>{item.category}</Text>
               <Text style={styles.cardText}>Start Time: {new Date(item.startTime).toLocaleTimeString()}</Text>
               <Text style={styles.cardText}>End Time: {new Date(item.endTime).toLocaleTimeString()}</Text>
             </View>
