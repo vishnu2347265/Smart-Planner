@@ -1,237 +1,255 @@
+// 
+
+
+
+
+
+
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, TouchableOpacity, ScrollView, Modal, TouchableWithoutFeedback } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, Modal, StyleSheet } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faBell, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { faBell, faSort, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { CircularProgress } from 'react-native-circular-progress';
 
 const HomeScreen = ({ navigation, route }) => {
-  const [currentDate, setCurrentDate] = useState(new Date());
-  const [isModalVisible, setIsModalVisible] = useState(false);
   const [tasks, setTasks] = useState([]);
-
-  const formatDate = (date) => {
-    const options = { weekday: 'short' };
-    return date.toLocaleDateString('en-US', options);
-  };
-
-  const formatMonthYear = (date) => {
-    const options = { month: 'long', year: 'numeric' };
-    return date.toLocaleDateString('en-US', options);
-  };
-
-  const updateCurrentDate = (newDate) => {
-    setCurrentDate(newDate);
-    setIsModalVisible(false);
-    fetchTasks(newDate);
-  };
+  const [recentTask, setRecentTask] = useState(undefined);
+  const [selectedTask, setSelectedTask] = useState(null);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [filterDone, setFilterDone] = useState(false);
+  const [completionPercentage, setCompletionPercentage] = useState(0);
+  const [taskCategories, setTaskCategories] = useState([
+    { name: "Total Tasks", count: 0 },
+    { name: "Academics/Profession", count: 0 },
+    { name: "Personal", count: 0 },
+    { name: "Social", count: 0 },
+    { name: "General", count: 0 }
+  ]);
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
   useEffect(() => {
-    fetchTasks(currentDate);
-  }, []);
+    if (route.params && route.params.newTask) {
+      // Convert startTime to a serializable format (string representation of the date)
+      const newTask = {
+        ...route.params.newTask,
+        startTime: route.params.newTask.startTime.getTime() // Convert Date to milliseconds since Unix epoch
+      };
+      
 
-  const fetchTasks = (date) => {
-    // Implement your logic to fetch tasks for the given date from your data source
-    // For demonstration purposes, here we are setting some dummy tasks
-    setTasks([
-      { id: 1, title: 'Task 1', date: '2024-03-01' },
-      { id: 2, title: 'Task 2', date: '2024-03-01' },
-      { id: 3, title: 'Task 3', date: '2024-03-02' },
-    ]);
-  };
+      setTasks(prevTasks => [newTask, ...prevTasks]);
+      setRecentTask(newTask);
 
-  const getCalendarDates = () => {
-    const today = new Date(currentDate);
-    const currentMonth = today.getMonth();
-    const nextMonth = new Date(today);
-    nextMonth.setMonth(currentMonth + 1);
+      // Update total tasks count
+      setTaskCategories(categories => {
+        const newCategories = [...categories];
+        newCategories[0].count++;
+        return newCategories;
+      });
 
-    const calendarDates = [];
-    let date = new Date(today);
-    while (date.getMonth() === currentMonth) {
-      calendarDates.push(new Date(date));
-      date.setDate(date.getDate() + 1);
+      // Update category-specific tasks count
+      const categoryIndex = taskCategories.findIndex(category => category.name === newTask.category);
+      if (categoryIndex !== -1) {
+        setTaskCategories(categories => {
+          const newCategories = [...categories];
+          newCategories[categoryIndex].count++;
+          return newCategories;
+        });
+      }
     }
+  }, [route.params]);
 
-    calendarDates.push('+');
+  const toggleTaskCompletion = (index) => {
+    const updatedTasks = [...tasks];
+    const taskToMove = { ...updatedTasks[index] }; // Create a copy of the task
 
-    return calendarDates;
+    // Toggle the completion status of the task
+    taskToMove.completed = !taskToMove.completed;
+
+    // Update the task in the array
+    updatedTasks[index] = taskToMove;
+
+    // Recalculate the completion percentage
+    const completedTaskCount = updatedTasks.filter(task => task.completed).length;
+    const totalTaskCount = updatedTasks.length;
+    const newCompletionPercentage = totalTaskCount === 0 ? 0 : (completedTaskCount / totalTaskCount) * 100;
+
+    // Update the state with the new task list and completion percentage
+    setTasks(updatedTasks);
+    setCompletionPercentage(newCompletionPercentage);
   };
 
-  const monthNames = Array.from({ length: 12 }, (_, index) => {
-    return {
-      label: formatMonthYear(new Date(currentDate.getFullYear(), index, 1)),
-      value: index,
-    };
-  });
-
-  const navigateToTaskScreen = () => {
-    navigation.navigate('Task', { selectedDate: currentDate.toISOString().split('T')[0] });
+  const handleTaskPress = (task) => {
+    setSelectedTask(task);
+    setModalVisible(true);
   };
+
+  const closeModal = () => {
+    setSelectedTask(null);
+    setModalVisible(false);
+  };
+
+  const deleteTask = () => {
+    const updatedTasks = tasks.filter(task => task !== selectedTask);
+    setTasks(updatedTasks);
+    closeModal();
+  };
+
+  const applyFilter = () => {
+    setFilterDone(!filterDone);
+    // Toggle the sorting order based on completion status
+    setTasks(prevTasks => {
+      return [...prevTasks].sort((a, b) => {
+        if (a.completed !== b.completed) {
+          // If completion status is different, sort by completion status
+          return filterDone ? (a.completed ? -1 : 1) : (a.completed ? 1 : -1);
+        } else {
+          // If completion status is same, maintain the existing order
+          return 0;
+        }
+      });
+    });
+  };
+
 
   return (
-    <View style={styles.container}>
-      <View style={styles.topBar}>
-        <View style={styles.profileContainer}>
-          <Image source={require('../assets/profile.png')} style={styles.profilePhoto} />
-          <View style={styles.profileInfo}>
-            <Text style={styles.userName}>Alwin Tomy</Text>
-            <Text style={styles.date}>{currentDate.toDateString()}</Text> 
-          </View>
+    <View style={{ flex: 1, backgroundColor: 'black', borderTopWidth: 0, paddingHorizontal: 30, paddingTop: 80 }}>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
+        <View>
+          <Text style={{ color: 'white', fontSize: 24 }}>Hey Alwin 🙋‍♂️</Text>
         </View>
-        <TouchableOpacity style={styles.notificationButton}>
-          <FontAwesomeIcon icon={faBell} style={styles.notificationIcon} />
+        <TouchableOpacity onPress={() => console.log("Notification bell icon pressed")} style={{ paddingHorizontal: 8, paddingTop: 30 }}>
+          <FontAwesomeIcon icon={faBell} size={20} color="white" />
         </TouchableOpacity>
       </View>
-      <TouchableOpacity onPress={navigateToTaskScreen}>
-        <View style={styles.monthYearContainer}>
-          <Text style={styles.monthYearText}>{formatMonthYear(currentDate)}</Text>
-          <FontAwesomeIcon icon={faChevronRight} style={styles.arrowIcon} />
-        </View>
-      </TouchableOpacity>
-      <Modal
-        visible={isModalVisible}
-        animationType="slide"
-        transparent={true}
-        onRequestClose={() => setIsModalVisible(false)}>
-        <TouchableWithoutFeedback onPress={() => setIsModalVisible(false)}>
-          <View style={styles.modalContainer}>
-            <View style={styles.modalContent}>
-              <ScrollView>
-                {monthNames.map((month, index) => (
-                  <TouchableOpacity
-                    key={index}
-                    onPress={() => updateCurrentDate(new Date(currentDate.getFullYear(), month.value, 1))}
-                    style={styles.monthButton}>
-                    <Text>{month.label}</Text>
-                  </TouchableOpacity>
-                ))}
-              </ScrollView>
-            </View>
-          </View>
-        </TouchableWithoutFeedback>
-      </Modal>
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={styles.calendarContainer}>
-        {getCalendarDates().map((date, index) => (
+      <View style={{ borderWidth: 1, borderColor: 'black', marginBottom: 20 }}>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ marginTop: 10, marginBottom: 20 }}>
+          <TouchableOpacity onPress={() => setModalVisible(true)} style={{ backgroundColor: '#DDFF94', width: 150, height: 170, borderRadius: 10, alignItems: 'center', justifyContent: 'center', marginHorizontal: 5 }}>
+            <Text style={{ color: 'black', fontSize: 18, marginBottom: 10 }}>My Tasks</Text>
+            <CircularProgress
+              size={50}
+              width={6}
+              fill={completionPercentage}
+              tintColor="blue" // Color when progress is filled
+              backgroundColor="white" // Color when progress is not filled
+            >
+              {() => (
+                <Text style={{ color: 'black', fontSize: 15 }}>{Math.round(completionPercentage)}%</Text>
+              )}
+            </CircularProgress>
+          </TouchableOpacity>
+          <TouchableOpacity style={{ backgroundColor: '#9F7AF9', width: 150, height: 170, borderRadius: 10, alignItems: 'center', justifyContent: 'center', marginHorizontal: 5 }}>
+            <Text style={{ color: 'white', fontSize: 18 }}>Review Analytics</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={{ backgroundColor: '#FB83F7', width: 150, height: 170, borderRadius: 10, alignItems: 'center', justifyContent: 'center', marginHorizontal: 5 }}>
+            <Text style={{ color: 'white', fontSize: 18 }}>Pandora</Text>
+          </TouchableOpacity>
+        </ScrollView>
+      </View>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
+        <Text style={{ color: 'white', fontSize: 20, marginLeft: 10 }}>Recent Tasks</Text>
+        <TouchableOpacity onPress={applyFilter} style={{ paddingHorizontal: 8, marginTop: 10 }}>
+          <FontAwesomeIcon icon={faSort} size={20} color="white" />
+        </TouchableOpacity>
+      </View>
+      <ScrollView style={{ flex: 1 }}>
+        {tasks.map((task, index) => (
           <TouchableOpacity
             key={index}
-            style={styles.calendarBox}
-            onPress={() => {
-              if (date === '+') {
-                updateCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1));
-              }
-            }}>
-            {date === '+' ? (
-              <Text style={styles.nextMonthIndicator}>+</Text>
-            ) : (
-              <>
-                <Text style={styles.calendarDay}>{formatDate(date)}</Text>
-                <Text style={styles.calendarDate}>
-                  {date.getDate() < 10 ? '0' + date.getDate() : date.getDate()}
-                </Text>
-              </>
-            )}
+            style={{
+              backgroundColor: task.completed ? '#808080' : '#FFD700',
+              width: '100%',
+              height: 100,
+              borderRadius: 10,
+              alignItems: 'center',
+              justifyContent: 'center',
+              marginBottom: 10,
+              marginTop: 10,
+              marginHorizontal: 5
+            }}
+            onPress={() => handleTaskPress(task)}
+          >
+            <Text style={{ color: 'black', fontSize: 18 }}>{task.name}</Text>
+            <Text style={{ color: 'black', fontSize: 16 }}>{task.description}</Text>
+            <TouchableOpacity onPress={() => toggleTaskCompletion(index)} style={{ flexDirection: 'row', alignItems: 'center', marginTop: 5 }}>
+              <View style={[styles.radioButton, { backgroundColor: task.completed ? 'green' : 'red' }]} />
+              <Text style={{ color: 'black', marginLeft: 5 }}>{task.completed ? 'Mark as Undone' : 'Mark as Done'}</Text>
+            </TouchableOpacity>
           </TouchableOpacity>
         ))}
       </ScrollView>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={closeModal}
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            {taskCategories.map((category, index) => (
+              <TouchableOpacity
+                key={index}
+                style={styles.categoryItem}
+                onPress={() => handleCategoryPress(category)}
+              >
+                <Text style={styles.modalText}>{category.name} ({category.count})</Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 };
 
-const styles = {
-  container: {
-    flex: 1,
-    padding: 20,
-  },
-  topBar: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 20,
-  },
-  profileContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  profileInfo: {
-    flexDirection: 'column', 
-    marginLeft: 10,
-  },
-  profilePhoto: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-  },
-  userName: {
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  date: {
-    fontSize: 12,
-    color: 'gray',
-  },
-  notificationButton: {
-    padding: 10,
-  },
-  notificationIcon: {
-    width: 20,
-    height: 20,
-  },
-  monthYearContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 10,
-  },
-  monthYearText: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    marginRight: 8, 
-  },
-  arrowIcon: {
-    fontSize: 20,
-    color: 'black',
-  },
-  calendarContainer: {
-    alignItems: 'flex-start',
-  },
-  calendarBox: {
-    backgroundColor: '#00FF00',
-    padding: 15,
-    marginRight: 10,
-    borderRadius: 5,
-    alignItems: 'center',
-  },
-  calendarDay: {
-    fontSize: 12,
-  },
-  calendarDate: {
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  nextMonthIndicator: {
-    fontSize: 24,
-    fontWeight: 'bold',
-  },
-  modalContainer: {
+const styles = StyleSheet.create({
+  centeredView: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    marginTop: 22,
   },
-  modalContent: {
+  modalView: {
+    margin: 20,
     backgroundColor: 'white',
-    padding: 20,
-    borderRadius: 10,
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
     elevation: 5,
-    maxHeight: 500,
-    width: "80%", 
   },
-  monthButton: {
-    paddingVertical: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
+  modalText: {
+    marginBottom: 15,
+    textAlign: 'center',
   },
-};
+  categoryItem: {
+    padding: 10,
+  },
+  radioButton: {
+    width: 20,
+    height: 20,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: 'black',
+    marginRight: 10
+  },
+  deleteButton: {
+    backgroundColor: 'red',
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+    marginTop: 10,
+  },
+  deleteButtonText: {
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+});
 
 export default HomeScreen;
