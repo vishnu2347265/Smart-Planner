@@ -324,6 +324,7 @@ const AddTaskScreen = ({ navigation, route }) => {
 
   const sendData = async () => {
     const token = await AsyncStorage.getItem("token");
+    console.log(token)
     const data = {
       categoryName: selectedCategory,
       taskName: selectedTask,
@@ -335,7 +336,7 @@ const AddTaskScreen = ({ navigation, route }) => {
       token: token, // Add comma here
     };
   
-    axios.post('http://10.0.2.2:5001/task/createTask', data)
+    axios.post('http://192.168.114.96:5001/task/createTask', data)
       .then((res) => {
         console.log("TASK CREATED");
         navigation.navigate('Home');
@@ -500,7 +501,7 @@ const AddTaskScreen = ({ navigation, route }) => {
 
 
   return (
-    <ScrollView>
+    
 
       <View style={styles.container}>
         {/* Header */}
@@ -639,7 +640,7 @@ const AddTaskScreen = ({ navigation, route }) => {
           <Text style={styles.createTaskButtonText}>Create Task</Text>
         </TouchableOpacity>
       </View>
-    </ScrollView>
+    
   );
 };
 
