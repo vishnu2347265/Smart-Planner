@@ -290,154 +290,586 @@
   {
     "categoryName": "Academics/Profession",
     "taskName": "Custom",
-    "description": "Review literature",
-    "startDate": "2024-03-28",
-    "endDate": "2024-03-28",
-    "startTime": "09:00",
-    "endTime": "11:00"
-  },
-  {
-    "categoryName": "Personal",
-    "taskName": "Custom",
-    "description": "Go for a walk",
-    "startDate": "2024-03-28",
-    "endDate": "2024-03-28",
-    "startTime": "12:00",
-    "endTime": "13:00"
-  },
-  {
-    "categoryName": "Social",
-    "taskName": "Custom",
-    "description": "Attend charity event",
-    "startDate": "2024-03-28",
-    "endDate": "2024-03-28",
-    "startTime": "15:00",
-    "endTime": "17:00"
-  },
-  {
-    "categoryName": "General",
-    "taskName": "Custom",
-    "description": "Update software",
-    "startDate": "2024-03-28",
-    "endDate": "2024-03-28",
-    "startTime": "19:00",
-    "endTime": "21:00"
-  },
-  {
-    "categoryName": "Academics/Profession",
-    "taskName": "Custom",
-    "description": "Attend webinar",
-    "startDate": "2024-03-29",
-    "endDate": "2024-03-29",
-    "startTime": "13:00",
-    "endTime": "15:00"
-  },
-  {
-    "categoryName": "Personal",
-    "taskName": "Custom",
-    "description": "Read a book",
-    "startDate": "2024-03-29",
-    "endDate": "2024-03-29",
-    "startTime": "16:00",
-    "endTime": "18:00"
-  },
-  {
-    "categoryName": "Social",
-    "taskName": "Custom",
-    "description": "Go to movie night",
-    "startDate": "2024-03-29",
-    "endDate": "2024-03-29",
-    "startTime": "20:00",
-    "endTime": "23:00"
-  },
-  {
-    "categoryName": "General",
-    "taskName": "Custom",
-    "description": "Call family",
-    "startDate": "2024-03-29",
-    "endDate": "2024-03-29",
-    "startTime": "19:00",
-    "endTime": "20:00"
-  },
-  {
-    "categoryName": "Academics/Profession",
-    "taskName": "Custom",
-    "description": "Prepare presentation",
-    "startDate": "2024-03-30",
-    "endDate": "2024-03-30",
-    "startTime": "09:00",
-    "endTime": "11:00"
-  },
-  {
-    "categoryName": "Personal",
-    "taskName": "Custom",
-    "description": "Plan weekend activities",
-    "startDate": "2024-03-30",
-    "endDate": "2024-03-30",
-    "startTime": "12:00",
-    "endTime": "14:00"
-  },
-  {
-    "categoryName": "Social",
-    "taskName": "Custom",
-    "description": "Have dinner with friends",
-    "startDate": "2024-03-30",
-    "endDate": "2024-03-30",
-    "startTime": "19:00",
-    "endTime": "21:00"
-  },
-  {
-    "categoryName": "General",
-    "taskName": "Custom",
-    "description": "Organize workspace",
-    "startDate": "2024-03-30",
-    "endDate": "2024-03-30",
-    "startTime": "15:00",
-    "endTime": "17:00"
-  },
-  {
-    "categoryName": "Academics/Profession",
-    "taskName": "Custom",
-    "description": "Attend conference",
-    "startDate": "2024-03-31",
-    "endDate": "2024-03-31",
+    "description": "Research for project",
+    "startDate": "2024-02-01",
+    "endDate": "2024-02-01",
     "startTime": "10:00",
     "endTime": "12:00"
   },
   {
     "categoryName": "Personal",
+    "taskName": "Fitness/Health",
+    "description": "Attend spin class",
+    "startDate": "2024-02-01",
+    "endDate": "2024-02-01",
+    "startTime": "13:00",
+    "endTime": "14:00"
+  },
+  {
+    "categoryName": "Social",
+    "taskName": "Meetings",
+    "description": "Attend study group session",
+    "startDate": "2024-02-01",
+    "endDate": "2024-02-01",
+    "startTime": "15:00",
+    "endTime": "17:00"
+  },
+  {
+    "categoryName": "General",
     "taskName": "Custom",
-    "description": "Practice painting",
-    "startDate": "2024-03-31",
-    "endDate": "2024-03-31",
+    "description": "Plan family game night",
+    "startDate": "2024-02-01",
+    "endDate": "2024-02-01",
+    "startTime": "18:00",
+    "endTime": "20:00"
+  },
+  {
+    "categoryName": "Academics/Profession",
+    "taskName": "Homework/Assignments",
+    "description": "Complete literature review",
+    "startDate": "2024-01-30",
+    "endDate": "2024-01-30",
+    "startTime": "09:00",
+    "endTime": "11:00"
+  },
+  {
+    "categoryName": "Personal",
+    "taskName": "Studies",
+    "description": "Practice language skills",
+    "startDate": "2024-01-30",
+    "endDate": "2024-01-30",
+    "startTime": "12:00",
+    "endTime": "14:00"
+  },
+  {
+    "categoryName": "Social",
+    "taskName": "Social Events",
+    "description": "Attend movie night with friends",
+    "startDate": "2024-01-30",
+    "endDate": "2024-01-30",
+    "startTime": "15:00",
+    "endTime": "17:00"
+  },
+  {
+    "categoryName": "General",
+    "taskName": "Custom",
+    "description": "Plan weekend picnic",
+    "startDate": "2024-01-30",
+    "endDate": "2024-01-30",
+    "startTime": "18:00",
+    "endTime": "20:00"
+  },
+  {
+    "categoryName": "Academics/Profession",
+    "taskName": "Exams/Tests",
+    "description": "Study for history exam",
+    "startDate": "2024-01-29",
+    "endDate": "2024-01-29",
+    "startTime": "09:00",
+    "endTime": "11:00"
+  },
+  {
+    "categoryName": "Personal",
+    "taskName": "Projects",
+    "description": "Work on DIY project",
+    "startDate": "2024-01-29",
+    "endDate": "2024-01-29",
+    "startTime": "12:00",
+    "endTime": "14:00"
+  },
+  {
+    "categoryName": "Social",
+    "taskName": "Extracurricular Activities",
+    "description": "Attend art class",
+    "startDate": "2024-01-29",
+    "endDate": "2024-01-29",
+    "startTime": "15:00",
+    "endTime": "17:00"
+  },
+  {
+    "categoryName": "General",
+    "taskName": "Reminders",
+    "description": "Set reminders for appointments",
+    "startDate": "2024-01-29",
+    "endDate": "2024-01-29",
+    "startTime": "18:00",
+    "endTime": "19:00"
+  },
+  {
+    "categoryName": "Academics/Profession",
+    "taskName": "Custom",
+    "description": "Prepare for seminar",
+    "startDate": "2024-01-28",
+    "endDate": "2024-01-28",
+    "startTime": "10:00",
+    "endTime": "12:00"
+  },
+  {
+    "categoryName": "Personal",
+    "taskName": "Fitness/Health",
+    "description": "Go for a jog",
+    "startDate": "2024-01-28",
+    "endDate": "2024-01-28",
+    "startTime": "13:00",
+    "endTime": "14:00"
+  },
+  {
+    "categoryName": "Social",
+    "taskName": "Social Events",
+    "description": "Attend birthday party",
+    "startDate": "2024-01-28",
+    "endDate": "2024-01-28",
+    "startTime": "15:00",
+    "endTime": "17:00"
+  },
+  {
+    "categoryName": "General",
+    "taskName": "Custom",
+    "description": "Plan family dinner",
+    "startDate": "2024-01-28",
+    "endDate": "2024-01-28",
+    "startTime": "18:00",
+    "endTime": "20:00"
+  },
+  {
+    "categoryName": "Academics/Profession",
+    "taskName": "Homework/Assignments",
+    "description": "Research for chemistry assignment",
+    "startDate": "2024-01-27",
+    "endDate": "2024-01-27",
+    "startTime": "10:00",
+    "endTime": "12:00"
+  },
+  {
+    "categoryName": "Personal",
+    "taskName": "Studies",
+    "description": "Review notes for upcoming exam",
+    "startDate": "2024-01-27",
+    "endDate": "2024-01-27",
     "startTime": "13:00",
     "endTime": "15:00"
   },
   {
     "categoryName": "Social",
-    "taskName": "Custom",
-    "description": "Attend music concert",
-    "startDate": "2024-03-31",
-    "endDate": "2024-03-31",
-    "startTime": "17:00",
-    "endTime": "20:00"
+    "taskName": "Meetings",
+    "description": "Attend club meeting",
+    "startDate": "2024-01-27",
+    "endDate": "2024-01-27",
+    "startTime": "16:00",
+    "endTime": "18:00"
   },
   {
     "categoryName": "General",
     "taskName": "Custom",
-    "description": "Pay bills",
-    "startDate": "2024-03-31",
-    "endDate": "2024-03-31",
-    "startTime": "21:00",
-    "endTime": "22:00"
+    "description": "Go for a run",
+    "startDate": "2024-01-27",
+    "endDate": "2024-01-27",
+    "startTime": "19:00",
+    "endTime": "20:00"
+  },
+  {
+    "categoryName": "Academics/Profession",
+    "taskName": "Exams/Tests",
+    "description": "Study for physics exam",
+    "startDate": "2024-01-26",
+    "endDate": "2024-01-26",
+    "startTime": "09:00",
+    "endTime": "11:00"
+  },
+  {
+    "categoryName": "Personal",
+    "taskName": "Projects",
+    "description": "Work on art project",
+    "startDate": "2024-01-26",
+    "endDate": "2024-01-26",
+    "startTime": "12:00",
+    "endTime": "14:00"
+  },
+  {
+    "categoryName": "Social",
+    "taskName": "Extracurricular Activities",
+    "description": "Attend soccer practice",
+    "startDate": "2024-01-26",
+    "endDate": "2024-01-26",
+    "startTime": "15:00",
+    "endTime": "17:00"
+  },
+  {
+    "categoryName": "General",
+    "taskName": "Reminders",
+    "description": "Set reminders for appointments",
+    "startDate": "2024-01-26",
+    "endDate": "2024-01-26",
+    "startTime": "18:00",
+    "endTime": "19:00"
   },
   {
     "categoryName": "Academics/Profession",
     "taskName": "Custom",
-    "description": "Review code",
-    "startDate": "2024-04-01",
-    "endDate": "2024-04-01",
-    "startTime": "08:00",
-    "endTime": "10:00"
+    "description": "Prepare for seminar",
+    "startDate": "2024-01-28",
+    "endDate": "2024-01-28",
+    "startTime": "10:00",
+    "endTime": "12:00"
+  },
+  {
+    "categoryName": "Personal",
+    "taskName": "Fitness/Health",
+    "description": "Go for a jog",
+    "startDate": "2024-01-28",
+    "endDate": "2024-01-28",
+    "startTime": "13:00",
+    "endTime": "14:00"
+  },
+  {
+    "categoryName": "Social",
+    "taskName": "Social Events",
+    "description": "Attend birthday party",
+    "startDate": "2024-01-28",
+    "endDate": "2024-01-28",
+    "startTime": "15:00",
+    "endTime": "17:00"
+  },
+  {
+    "categoryName": "General",
+    "taskName": "Custom",
+    "description": "Plan family dinner",
+    "startDate": "2024-01-28",
+    "endDate": "2024-01-28",
+    "startTime": "18:00",
+    "endTime": "20:00"
+  },
+  {
+    "categoryName": "Academics/Profession",
+    "taskName": "Homework/Assignments",
+    "description": "Research for chemistry assignment",
+    "startDate": "2024-01-27",
+    "endDate": "2024-01-27",
+    "startTime": "10:00",
+    "endTime": "12:00"
+  },
+  {
+    "categoryName": "Personal",
+    "taskName": "Studies",
+    "description": "Review notes for upcoming exam",
+    "startDate": "2024-01-27",
+    "endDate": "2024-01-27",
+    "startTime": "13:00",
+    "endTime": "15:00"
+  },
+  {
+    "categoryName": "Social",
+    "taskName": "Meetings",
+    "description": "Attend club meeting",
+    "startDate": "2024-01-27",
+    "endDate": "2024-01-27",
+    "startTime": "16:00",
+    "endTime": "18:00"
+  },
+  {
+    "categoryName": "General",
+    "taskName": "Custom",
+    "description": "Go for a run",
+    "startDate": "2024-01-27",
+    "endDate": "2024-01-27",
+    "startTime": "19:00",
+    "endTime": "20:00"
+  },
+  {
+    "categoryName": "Academics/Profession",
+    "taskName": "Exams/Tests",
+    "description": "Study for physics exam",
+    "startDate": "2024-01-26",
+    "endDate": "2024-01-26",
+    "startTime": "10:00",
+    "endTime": "12:00"
+  },
+  {
+    "categoryName": "Personal",
+    "taskName": "Projects",
+    "description": "Work on art project",
+    "startDate": "2024-01-26",
+    "endDate": "2024-01-26",
+    "startTime": "13:00",
+    "endTime": "15:00"
+  },
+  {
+    "categoryName": "Social",
+    "taskName": "Extracurricular Activities",
+    "description": "Attend soccer practice",
+    "startDate": "2024-01-26",
+    "endDate": "2024-01-26",
+    "startTime": "16:00",
+    "endTime": "18:00"
+  },
+  {
+    "categoryName": "General",
+    "taskName": "Reminders",
+    "description": "Set reminders for appointments",
+    "startDate": "2024-01-26",
+    "endDate": "2024-01-26",
+    "startTime": "19:00",
+    "endTime": "20:00"
+  },
+  {
+    "categoryName": "Academics/Profession",
+    "taskName": "Custom",
+    "description": "Research for project",
+    "startDate": "2024-02-01",
+    "endDate": "2024-02-01",
+    "startTime": "10:00",
+    "endTime": "12:00"
+  },
+  {
+    "categoryName": "Personal",
+    "taskName": "Fitness/Health",
+    "description": "Attend spin class",
+    "startDate": "2024-02-02",
+    "endDate": "2024-02-02",
+    "startTime": "13:00",
+    "endTime": "14:00"
+  },
+  {
+    "categoryName": "Social",
+    "taskName": "Meetings",
+    "description": "Attend study group session",
+    "startDate": "2024-02-03",
+    "endDate": "2024-02-03",
+    "startTime": "15:00",
+    "endTime": "17:00"
+  },
+  {
+    "categoryName": "General",
+    "taskName": "Custom",
+    "description": "Plan family game night",
+    "startDate": "2024-02-04",
+    "endDate": "2024-02-04",
+    "startTime": "18:00",
+    "endTime": "20:00"
+  },
+  {
+    "categoryName": "Academics/Profession",
+    "taskName": "Homework/Assignments",
+    "description": "Complete literature review",
+    "startDate": "2024-02-05",
+    "endDate": "2024-02-05",
+    "startTime": "09:00",
+    "endTime": "11:00"
+  },
+  {
+    "categoryName": "Personal",
+    "taskName": "Studies",
+    "description": "Practice language skills",
+    "startDate": "2024-02-06",
+    "endDate": "2024-02-06",
+    "startTime": "12:00",
+    "endTime": "14:00"
+  },
+  {
+    "categoryName": "Social",
+    "taskName": "Social Events",
+    "description": "Attend movie night with friends",
+    "startDate": "2024-02-07",
+    "endDate": "2024-02-07",
+    "startTime": "15:00",
+    "endTime": "17:00"
+  },
+  {
+    "categoryName": "General",
+    "taskName": "Custom",
+    "description": "Plan weekend picnic",
+    "startDate": "2024-02-08",
+    "endDate": "2024-02-08",
+    "startTime": "18:00",
+    "endTime": "20:00"
+  },
+  {
+    "categoryName": "Academics/Profession",
+    "taskName": "Exams/Tests",
+    "description": "Study for history exam",
+    "startDate": "2024-02-09",
+    "endDate": "2024-02-09",
+    "startTime": "09:00",
+    "endTime": "11:00"
+  },
+  {
+    "categoryName": "Personal",
+    "taskName": "Projects",
+    "description": "Work on DIY project",
+    "startDate": "2024-02-10",
+    "endDate": "2024-02-10",
+    "startTime": "12:00",
+    "endTime": "14:00"
+  },
+  {
+    "categoryName": "Social",
+    "taskName": "Extracurricular Activities",
+    "description": "Attend art class",
+    "startDate": "2024-02-11",
+    "endDate": "2024-02-11",
+    "startTime": "15:00",
+    "endTime": "17:00"
+  },
+  {
+    "categoryName": "General",
+    "taskName": "Reminders",
+    "description": "Set reminders for appointments",
+    "startDate": "2024-02-12",
+    "endDate": "2024-02-12",
+    "startTime": "18:00",
+    "endTime": "19:00"
+  },
+  {
+    "categoryName": "Academics/Profession",
+    "taskName": "Custom",
+    "description": "Prepare presentation slides",
+    "startDate": "2024-02-13",
+    "endDate": "2024-02-13",
+    "startTime": "10:00",
+    "endTime": "12:00"
+  },
+  {
+    "categoryName": "Personal",
+    "taskName": "Fitness/Health",
+    "description": "Attend yoga class",
+    "startDate": "2024-02-14",
+    "endDate": "2024-02-14",
+    "startTime": "13:00",
+    "endTime": "14:00"
+  },
+  {
+    "categoryName": "Social",
+    "taskName": "Meetings",
+    "description": "Attend club meeting",
+    "startDate": "2024-02-15",
+    "endDate": "2024-02-15",
+    "startTime": "15:00",
+    "endTime": "17:00"
+  },
+  {
+    "categoryName": "General",
+    "taskName": "Custom",
+    "description": "Plan family dinner",
+    "startDate": "2024-02-16",
+    "endDate": "2024-02-16",
+    "startTime": "18:00",
+    "endTime": "20:00"
+  },
+  {
+    "categoryName": "Academics/Profession",
+    "taskName": "Homework/Assignments",
+    "description": "Research for chemistry assignment",
+    "startDate": "2024-02-17",
+    "endDate": "2024-02-17",
+    "startTime": "10:00",
+    "endTime": "12:00"
+  },
+  {
+    "categoryName": "Personal",
+    "taskName": "Studies",
+    "description": "Review notes for upcoming exam",
+    "startDate": "2024-02-18",
+    "endDate": "2024-02-18",
+    "startTime": "13:00",
+    "endTime": "15:00"
+  },
+  {
+    "categoryName": "Social",
+    "taskName": "Meetings",
+    "description": "Attend community meeting",
+    "startDate": "2024-02-19",
+    "endDate": "2024-02-19",
+    "startTime": "16:00",
+    "endTime": "18:00"
+  },
+  {
+    "categoryName": "General",
+    "taskName": "Custom",
+    "description": "Organize workspace",
+    "startDate": "2024-02-20",
+    "endDate": "2024-02-20",
+    "startTime": "19:00",
+    "endTime": "20:00"
+  },
+  {
+    "categoryName": "Academics/Profession",
+    "taskName": "Exams/Tests",
+    "description": "Study for biology exam",
+    "startDate": "2024-02-21",
+    "endDate": "2024-02-21",
+    "startTime": "09:00",
+    "endTime": "11:00"
+  },
+  {
+    "categoryName": "Personal",
+    "taskName": "Projects",
+    "description": "Work on DIY project",
+    "startDate": "2024-02-22",
+    "endDate": "2024-02-22",
+    "startTime": "12:00",
+    "endTime": "14:00"
+  },
+  {
+    "categoryName": "Social",
+    "taskName": "Extracurricular Activities",
+    "description": "Attend pottery class",
+    "startDate": "2024-02-23",
+    "endDate": "2024-02-23",
+    "startTime": "15:00",
+    "endTime": "17:00"
+  },
+  {
+    "categoryName": "General",
+    "taskName": "Reminders",
+    "description": "Set reminders for appointments",
+    "startDate": "2024-02-24",
+    "endDate": "2024-02-24",
+    "startTime": "18:00",
+    "endTime": "19:00"
+  },
+  {
+    "categoryName": "Academics/Profession",
+    "taskName": "Custom",
+    "description": "Prepare for seminar",
+    "startDate": "2024-02-25",
+    "endDate": "2024-02-25",
+    "startTime": "10:00",
+    "endTime": "12:00"
+  },
+  {
+    "categoryName": "Personal",
+    "taskName": "Fitness/Health",
+    "description": "Go for a jog",
+    "startDate": "2024-02-26",
+    "endDate": "2024-02-26",
+    "startTime": "13:00",
+    "endTime": "14:00"
+  },
+  {
+    "categoryName": "Social",
+    "taskName": "Social Events",
+    "description": "Attend birthday party",
+    "startDate": "2024-02-27",
+    "endDate": "2024-02-27",
+    "startTime": "15:00",
+    "endTime": "17:00"
+  },
+  {
+    "categoryName": "General",
+    "taskName": "Custom",
+    "description": "Plan family dinner",
+    "startDate": "2024-02-28",
+    "endDate": "2024-02-28",
+    "startTime": "18:00",
+    "endTime": "20:00"
+  },
+  {
+    "categoryName": "Academics/Profession",
+    "taskName": "Homework/Assignments",
+    "description": "Complete programming assignment",
+    "startDate": "2024-02-29",
+    "endDate": "2024-02-29",
+    "startTime": "09:00",
+    "endTime": "11:00"
   }
 ]
