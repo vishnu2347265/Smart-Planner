@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const jwt = require('jsonwebtoken');
 const mongoose = require("mongoose");
 app.use(express.json());
 const taskRoutes = require('./routes/task');
@@ -177,6 +178,47 @@ app.put('/set-end-time/:taskId', async (req, res) => {
 });
 
 
+app.post("/user/previous-month-tasks", async (req, res) => {
+    try {
+        const { token } = req.body;
+
+        const decoded = jwt.verify(token, JWT_SECRET);
+        const userId = decoded._id;
+
+        const today = new Date();
+        const firstDayOfPrevMonth = new Date(today.getFullYear(), today.getMonth() - 1, 1);
+        const lastDayOfPrevMonth = new Date(today.getFullYear(), today.getMonth(), 0);
+
+        if (today.getMonth() === 0) {
+            firstDayOfPrevMonth.setFullYear(today.getFullYear() - 1);
+            lastDayOfPrevMonth.setFullYear(today.getFullYear() - 1);
+        }
+
+        const user = await User.findById(userId).populate({
+            path: 'tasks',
+            match: {
+                startDate: { $gte: firstDayOfPrevMonth, $lte: lastDayOfPrevMonth }
+            }
+        });
+
+        if (!user) {
+            return res.status(404).json({ error: "User not found" });
+        }
+        const categoryCounts = {};
+        user.tasks.forEach(task => {
+            if (task.taskCategory in categoryCounts) {
+                categoryCounts[task.taskCategory]++;
+            } else {
+                categoryCounts[task.taskCategory] = 1;
+            }
+        });
+
+        res.json({ categoryCounts });
+    } catch (error) {
+        console.error("Error fetching previous month's tasks:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
 
 app.listen(5001, () => {
     console.log("Node js Server Started");
