@@ -324,6 +324,7 @@ const AddTaskScreen = ({ navigation, route }) => {
 
   const sendData = async () => {
     const token = await AsyncStorage.getItem("token");
+    console.log(token)
     const data = {
       categoryName: selectedCategory,
       taskName: selectedTask,
@@ -500,7 +501,7 @@ const AddTaskScreen = ({ navigation, route }) => {
 
 
   return (
-    <ScrollView>
+    
 
       <View style={styles.container}>
         {/* Header */}
@@ -639,7 +640,7 @@ const AddTaskScreen = ({ navigation, route }) => {
           <Text style={styles.createTaskButtonText}>Create Task</Text>
         </TouchableOpacity>
       </View>
-    </ScrollView>
+    
   );
 };
 

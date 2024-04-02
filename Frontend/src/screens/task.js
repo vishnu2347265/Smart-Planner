@@ -49,7 +49,8 @@
 //         {categories.map((category, index) => (
 //           <TouchableOpacity key={index} onPress={() => handleCategoryPress(category.name)}>
 //             <View style={[styles.card, { backgroundColor: category.color }]}>
-//               <Text style={{ fontSize: 18, marginBottom: 5 }}>{category.name}</Text>
+//               <Text style={{ fontSize: 
+// 8, marginBottom: 5 }}>{category.name}</Text>
 //               {/* Display tasks for the category */}
 //               {tasks.map((task, taskIndex) => {
 //                 if (task.category === category.name) {

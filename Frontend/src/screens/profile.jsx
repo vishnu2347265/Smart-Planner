@@ -1,17 +1,13 @@
-
-
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native';
 import { BarChart } from 'react-native-chart-kit';
 import { FontAwesome } from '@expo/vector-icons'; // Import FontAwesome icon library
 import hardcodedTasks from './hardcodedTasks'; // Import hardcoded tasks
-import AsyncStorage from '@react-native-async-storage/async-storage'
-import axios from 'axios'
 
 // Dummy user data for testing
 const user = {
-  name: 'Alwin Tomy',
-  email: 'alwintomy11@gmail.com',
+  name: 'Vishnu PS',
+  email: 'vis@gmail.com',
   avatar: require('../assets/profile.png'), // Assuming you have an avatar image
   bio: 'Previous Month Analytics',
 };
@@ -69,54 +65,40 @@ const ProfileScreen = ({ navigation }) => {
   };
 
   const handleLeftButtonPress = () => {
-    switch (selectedGraph) {
-      case 'previousMonth':
-        setSelectedGraph('general');
-        setGraphHeading('General');
-        break;
-      case 'personal':
-        setSelectedGraph('previousMonth');
-        setGraphHeading(user.bio);
-        break;
-      case 'social':
-        setSelectedGraph('personal');
-        setGraphHeading('Personal');
-        break;
-      case 'general':
-        setSelectedGraph('social');
-        setGraphHeading('Social');
-        break;
-      default:
-        break;
-    }
+    console.log('Left button pressed');
   };
-
+  
   const handleRightButtonPress = () => {
-    switch (selectedGraph) {
+    const graphs = ['previousMonth', 'academicsProfession', 'personal', 'social', 'general'];
+    const currentIndex = graphs.indexOf(selectedGraph);
+    const nextIndex = (currentIndex + 1) % graphs.length;
+    setSelectedGraph(graphs[nextIndex]);
+
+    // Update graph heading based on selected graph
+    switch (graphs[nextIndex]) {
       case 'previousMonth':
-        setSelectedGraph('personal');
-        setGraphHeading('Personal');
-        break;
-      case 'personal':
-        setSelectedGraph('social');
-        setGraphHeading('Social');
-        break;
-      case 'social':
-        setSelectedGraph('general');
-        setGraphHeading('General');
-        break;
-      case 'general':
-        setSelectedGraph('previousMonth');
         setGraphHeading(user.bio);
         break;
+      case 'academicsProfession':
+        setGraphHeading('Academics/Profession');
+        break;
+      case 'personal':
+        setGraphHeading('Personal');
+        break;
+      case 'social':
+        setGraphHeading('Social');
+        break;
+      case 'general':
+        setGraphHeading('General');
+        break;
       default:
+        setGraphHeading(user.bio);
         break;
     }
   };
 
   // Calculate analysis data from calendar items
-  const calculateAnalysisData =  async () => {
-    const token = await AsyncStorage.getItem("token");
+  const calculateAnalysisData = () => {
     // Initialize analysis data object
     await axios.post('http://172.20.10.13:5001/user/previous-month-tasks', { token })
     .then(response => {
@@ -133,31 +115,43 @@ const ProfileScreen = ({ navigation }) => {
       'General': 100,
     };
 
-    // Initialize data for personal, social, and general graphs
+    // Initialize Academics/Profession data
+    const academicsProfessionData = {
+      'Subject 1': 30,
+      'Subject 2': 40,
+      'Subject 3': 20,
+      'Subject 4': 50,
+    };
+
+    // Initialize Personal data
     const personalData = {
-      'Sleep': 8,
-      'Exercise': 2,
-      'Hobbies': 4,
-      'Self-Care': 3,
+      'Personal Activity 1': 20,
+      'Personal Activity 2': 30,
+      'Personal Activity 3': 40,
+      'Personal Activity 4': 50,
     };
 
+    // Initialize Social data
     const socialData = {
-      'Family': 10,
-      'Friends': 8,
-      'Events': 6,
-      'Meetings': 4,
+      'Social Activity 1': 30,
+      'Social Activity 2': 40,
+      'Social Activity 3': 25,
+      'Social Activity 4': 35,
     };
 
+    // Initialize General data
     const generalData = {
-      'Work': 60,
-      'Study': 20,
-      'Household': 10,
-      'Errands': 10,
+      'General Task 1': 10,
+      'General Task 2': 20,
+      'General Task 3': 30,
+      'General Task 4': 40,
     };
 
     switch (selectedGraph) {
       case 'previousMonth':
         return previousMonthData;
+      case 'academicsProfession':
+        return academicsProfessionData;
       case 'personal':
         return personalData;
       case 'social':
@@ -173,32 +167,32 @@ const ProfileScreen = ({ navigation }) => {
   const analysisData = calculateAnalysisData();
 
   // Automated feedback for each category
-  const feedback = {
-    'previousMonth': [
-      `Your efficiency in academic or professional tasks appears to be moderate. Consider allocating more time or effort to these areas for improved performance.`,
-      `You've dedicated a reasonable amount of time to personal activities. Keep maintaining a healthy balance between personal and other aspects of your life.`,
-      `Your social engagement seems to be quite active, reflecting a good level of social interaction. Continue nurturing your social connections.`,
-      `A significant portion of your time is spent on general tasks. Consider prioritizing tasks or organizing your activities more efficiently to optimize productivity.`,
-    ],
-    'personal': [
-      `Your sleep duration seems adequate.`,
-      `Consider increasing your exercise time for better health.`,
-      `You're spending a good amount of time on your hobbies.`,
-      `Maintaining self-care routines is crucial for overall well-being. Keep up the good work!`,
-    ],
-    'social': [
-      `Maintaining a healthy relationship with family is important.`,
-      `Nurturing friendships is essential for social well-being.`,
-      `Attending events can be refreshing and beneficial.`,
-      `Balancing meetings with other activities is key for time management.`,
-    ],
-    'general': [
-      `Your work engagement seems substantial.`,
-      `Dedicate enough time to your studies for better academic performance.`,
-      `Keeping up with household chores is important for a tidy environment.`,
-      `Efficiently completing errands is essential for daily life.`,
-    ],
-  };
+  const feedback = selectedGraph === 'previousMonth' ? [
+    `Your efficiency in academic or professional tasks appears to be moderate. Consider allocating more time or effort to these areas for improved performance.`,
+    `You've dedicated a reasonable amount of time to personal activities. Keep maintaining a healthy balance between personal and other aspects of your life.`,
+    `Your social engagement seems to be quite active, reflecting a good level of social interaction. Continue nurturing your social connections.`,
+    `A significant portion of your time is spent on general tasks. Consider prioritizing tasks or organizing your activities more efficiently to optimize productivity.`,
+  ] : selectedGraph === 'academicsProfession' ? [
+    `Your performance in academic subjects seems promising.`,
+    `You have shown consistent effort in subject-related activities.`,
+    `Continue focusing on your academic pursuits for better results.`,
+    `Consider seeking additional resources or support for subjects where you need improvement.`,
+  ] : selectedGraph === 'personal' ? [
+    `Your performance in personal activities appears satisfactory.`,
+    `Dedicate sufficient time to activities that contribute to your personal growth and well-being.`,
+    `Maintaining a healthy work-life balance is crucial for overall happiness and productivity.`,
+    `Consider exploring new hobbies or interests to enrich your personal life further.`,
+  ] : selectedGraph === 'social' ? [
+    `Your social interactions seem to be quite active.`,
+    `Building and maintaining social connections is important for overall well-being.`,
+    `Continue engaging with friends and participating in social activities.`,
+    `Consider broadening your social circle by joining clubs or groups with similar interests.`,
+  ] : [
+    `You've been productive in handling various general tasks.`,
+    `Efficiently managing general tasks contributes to overall productivity.`,
+    `Continue organizing and prioritizing your tasks effectively.`,
+    `Consider automating repetitive tasks or delegating when possible to free up time for higher-priority activities.`,
+  ];
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -249,8 +243,8 @@ const ProfileScreen = ({ navigation }) => {
 
       {/* Feedback for each category */}
       <View style={styles.feedbackContainer}>
-        {feedback[selectedGraph].map((text, index) => (
-          <Text key={index} style={styles.feedbackText}>{text}</Text>
+        {Object.keys(analysisData).map((category, index) => (
+          <Text key={index} style={styles.feedbackText}>{`${category}: ${feedback[index]}`}</Text>
         ))}
       </View>
     </ScrollView>
@@ -312,4 +306,3 @@ const styles = StyleSheet.create({
 });
 
 export default ProfileScreen;
-
