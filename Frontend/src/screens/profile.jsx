@@ -98,7 +98,7 @@ const ProfileScreen = ({ navigation }) => {
   };
 
   // Calculate analysis data from calendar items
-  const calculateAnalysisData = () => {
+  const calculateAnalysisData = async() => {
     // Initialize analysis data object
     await axios.post('http://172.20.10.13:5001/user/previous-month-tasks', { token })
     .then(response => {
