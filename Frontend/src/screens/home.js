@@ -233,6 +233,9 @@ const HomeScreen = ({ navigation, route }) => {
                 <Text style={styles.modalText}>{category.name} ({category.count})</Text>
               </TouchableOpacity>
             ))}
+            <TouchableOpacity onPress={closeModal}>
+              <Text>Close</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </Modal>
