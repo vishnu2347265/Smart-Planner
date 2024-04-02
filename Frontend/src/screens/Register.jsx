@@ -43,7 +43,7 @@ function Register() {
     };
     if (nameVerify && emailVerify && passwordVerify) {
       axios
-        .post("http://10.0.2.2:5001/auth/register", userData)
+        .post("http://172.20.10.13:5001/auth/register", userData)
         .then((res) => {
           console.log(res.data);
           if (res.data.status === "ok") {

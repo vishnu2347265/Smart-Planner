@@ -118,7 +118,7 @@ const ProfileScreen = ({ navigation }) => {
   const calculateAnalysisData =  async () => {
     const token = await AsyncStorage.getItem("token");
     // Initialize analysis data object
-    await axios.post('http://localhost:5001/user/previous-month-tasks', { token })
+    await axios.post('http://172.20.10.13:5001/user/previous-month-tasks', { token })
     .then(response => {
         console.log('Response:', response.data);
     })
