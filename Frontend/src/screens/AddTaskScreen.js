@@ -336,7 +336,7 @@ const AddTaskScreen = ({ navigation, route }) => {
       token: token, // Add comma here
     };
   
-    axios.post('http://172.20.10.13:5001/task/createTask', data)
+    axios.post('http://10.4.132.146:5001/task/createTask', data)
       .then((res) => {
         console.log("TASK CREATED");
         navigation.navigate('Home');
@@ -502,6 +502,7 @@ const AddTaskScreen = ({ navigation, route }) => {
 
   return (
     
+    <ScrollView>
 
       <View style={styles.container}>
         {/* Header */}
@@ -640,6 +641,7 @@ const AddTaskScreen = ({ navigation, route }) => {
           <Text style={styles.createTaskButtonText}>Create Task</Text>
         </TouchableOpacity>
       </View>
+    </ScrollView>
     
   );
 };

@@ -1,0 +1,53 @@
+{
+  "Academics/Profession": [
+    "Impressive dedication to your academic pursuits! Your commitment to learning is evident.",
+    "You're excelling in your academic endeavors! Keep up the great work.",
+    "Your hard work in academics is paying off! Your diligence is admirable.",
+    "You're making significant progress in your studies! Keep up the momentum.",
+    "Your academic achievements are commendable! Your determination is inspiring.",
+    "Your dedication to your profession is outstanding! Keep up the excellent work.",
+    "Impressive commitment to your professional responsibilities! Your hard work is noticed.",
+    "You're making strides in your career! Your dedication is paying off.",
+    "Your professional achievements are remarkable! Keep aiming for excellence.",
+    "Your work ethic is exemplary! Your contributions to your profession are valued."
+  ],
+  "Personal": [
+    "You're prioritizing your personal growth and well-being, which is fantastic to see! Keep investing in yourself.",
+    "Taking time for yourself amidst life's demands is crucial, and you're doing a fantastic job of maintaining balance.",
+    "You're making self-care a priority, and it's paying off! Keep nurturing your personal well-being.",
+    "Your commitment to personal development is inspiring! Keep striving for growth.",
+    "Balancing personal and professional responsibilities is no easy feat, but you're managing it admirably. Keep up the great work!"
+  ],
+  "General": [
+    "Your overall progress and efforts are commendable! Keep up the good work.",
+    "You're showing great dedication and commitment in all areas of your life. Keep pushing forward!",
+    "Your resilience and determination are impressive! Keep striving for excellence.",
+    "You're doing a fantastic job overall! Keep up the momentum.",
+    "Your positive attitude and hard work are making a difference! Keep it up!"
+  ],
+  "Social": [
+    "Your interactions and contributions to your social circle are appreciated! Keep fostering those connections.",
+    "You're balancing social activities well with your other responsibilities. Keep nurturing those relationships!",
+    "Your involvement in social activities adds value to your life and those around you. Keep up the good work!",
+    "You're maintaining a healthy social life while also focusing on your goals. Keep finding that balance!",
+    "Your presence in social settings is enriching for everyone involved. Keep being a positive influence!"
+  ],
+  "Academics/Profession-Personal": [
+    "You've been focusing on both academics/profession and personal growth equally! Keep up the balanced effort."
+  ],
+  "Personal-General": [
+    "Your attention to personal growth and your overall progress are equally impressive! Keep up the great work."
+  ],
+  "General-Social": [
+    "You're excelling both personally and socially! Keep up the fantastic progress in both areas."
+  ],
+  "Personal-Social": [
+    "You're doing a great job balancing personal growth and social interactions! Keep it up."
+  ],
+  "Academics/Profession-Social": [
+    "Your dedication to academics/profession and your social engagements are equally remarkable! Keep striving for excellence."
+  ],
+  "Academics/Profession-General": [
+    "You're making significant progress both academically/professionally and in general areas! Keep up the excellent work in both aspects."
+  ]
+}

@@ -31,3 +31,16 @@ exports.createTask = async (req, res) => {
 };
 
 
+exports.getAllTasks = async (req, res) => {
+    const { token } = req.body;
+    console.log("Token", token);
+    try {
+      const decodedToken = jwt.verify(token, JWT_SECRET);
+      const userId = decodedToken._id;
+      const userInfo = await User.findById(userId).populate("tasks");
+      res.send({ status: "ok", data: userInfo.tasks });
+    } catch (error) {
+      res.send({ status: "error", data: error });
+    }
+  };
+
