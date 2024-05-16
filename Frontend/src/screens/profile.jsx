@@ -20,9 +20,8 @@ const ProfileScreen = ({ navigation }) => {
   const [items, setItems] = useState({});
   const [selectedGraph, setSelectedGraph] = useState("previousMonth");
   const [graphHeading, setGraphHeading] = useState("Previous Month Analytics"); // Set default graph heading
-  
-  const user = useSelector(selectToken)
-  
+
+  const user = useSelector(selectToken);
 
   useEffect(() => {
     updateItems(hardcodedTasks);
@@ -72,7 +71,7 @@ const ProfileScreen = ({ navigation }) => {
     try {
       const token = await AsyncStorage.getItem("token");
       const response = await axios.post(
-        "http://10.4.132.164:5001/user/previous-month-tasks",
+        "http://10.4.205.62:5001/user/previous-month-tasks",
         { token }
       );
       console.log("Response:", response.data);
@@ -123,13 +122,10 @@ const ProfileScreen = ({ navigation }) => {
     <ScrollView contentContainerStyle={styles.container}>
       <View className="flex flex-col items-center justify-center">
         <Image
-          
           source={require("../assets/profilePic.png")}
           style={styles.profilePic}
         />
-        <Text className="text-lg font-bold text-white">
-        {user.data.name}
-        </Text>
+        <Text className="text-lg font-bold text-white">{user.data.name}</Text>
       </View>
       <View style={styles.chartContainer}>
         <View style={styles.chartHeader}>
@@ -178,13 +174,13 @@ const ProfileScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   profilePic: {
-    width: '25%',       // equivalent to w-1/4
-    height: '33%',      // equivalent to h-1/3
-    marginRight: 8,     // equivalent to mr-2, assuming 8 is the spacing unit
-    borderRadius: 50,   // This should be half of the width or height if they are equal
-    borderWidth: 2,     // Add border width (optional, adjust as needed)
-    borderColor: '#DDFF94', // Border color (optional, adjust as needed)
-    alignSelf: 'center', // Helps with alignment if the parent has no aligning styles
+    width: "25%", // equivalent to w-1/4
+    height: "33%", // equivalent to h-1/3
+    marginRight: 8, // equivalent to mr-2, assuming 8 is the spacing unit
+    borderRadius: 50, // This should be half of the width or height if they are equal
+    borderWidth: 2, // Add border width (optional, adjust as needed)
+    borderColor: "#DDFF94", // Border color (optional, adjust as needed)
+    alignSelf: "center", // Helps with alignment if the parent has no aligning styles
   },
   container: {
     flexGrow: 1,

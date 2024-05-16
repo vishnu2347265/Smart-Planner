@@ -253,21 +253,29 @@
 // AddTaskScreen.js
 
 // Import necessary modules
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, Alert, ScrollView } from 'react-native';
-import { Picker } from '@react-native-picker/picker';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import DatePicker from '@react-native-community/datetimepicker';
-import axios from 'axios'
-import AsyncStorage from '@react-native-async-storage/async-storage'
+import React, { useState, useEffect } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  TextInput,
+  Alert,
+  ScrollView,
+} from "react-native";
+import { Picker } from "@react-native-picker/picker";
+import Icon from "react-native-vector-icons/FontAwesome";
+import DatePicker from "@react-native-community/datetimepicker";
+import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const AddTaskScreen = ({ navigation, route }) => {
   // State variables
-  const [selectedCategory, setSelectedCategory] = useState('');
-  const [selectedTask, setSelectedTask] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedTask, setSelectedTask] = useState("");
   const [tasks, setTasks] = useState([]);
-  const [customTaskName, setCustomTaskName] = useState('');
-  const [description, setDescription] = useState('');
+  const [customTaskName, setCustomTaskName] = useState("");
+  const [description, setDescription] = useState("");
   const [startDate, setStartDate] = useState(new Date()); // Default to current date
   const [endDate, setEndDate] = useState(new Date()); // Default to current date for end date
   const [startTime, setStartTime] = useState(new Date()); // Default to current time for start time
@@ -282,13 +290,22 @@ const AddTaskScreen = ({ navigation, route }) => {
   const handleCreateTask = () => {
     // Ensure that both start and end dates and times are selected
     if (!startDate || !endDate || !startTime || !endTime) {
-      Alert.alert('Error', 'Please select start and end dates along with their times.');
+      Alert.alert(
+        "Error",
+        "Please select start and end dates along with their times."
+      );
       return;
     }
 
     // Ensure that end date is not before start date
-    if (endDate < startDate || (endDate.getTime() === startDate.getTime() && endTime < startTime)) {
-      Alert.alert('Error', 'End date and time cannot be before start date and time.');
+    if (
+      endDate < startDate ||
+      (endDate.getTime() === startDate.getTime() && endTime < startTime)
+    ) {
+      Alert.alert(
+        "Error",
+        "End date and time cannot be before start date and time."
+      );
       return;
     }
 
@@ -299,22 +316,45 @@ const AddTaskScreen = ({ navigation, route }) => {
       taskData = {
         category: selectedCategory,
         name: selectedTask,
-        startTime: new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate(), startTime.getHours(), startTime.getMinutes()),
-        endTime: new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDate(), endTime.getHours(), endTime.getMinutes()),
-        description: description
+        startTime: new Date(
+          startDate.getFullYear(),
+          startDate.getMonth(),
+          startDate.getDate(),
+          startTime.getHours(),
+          startTime.getMinutes()
+        ),
+        endTime: new Date(
+          endDate.getFullYear(),
+          endDate.getMonth(),
+          endDate.getDate(),
+          endTime.getHours(),
+          endTime.getMinutes()
+        ),
+        description: description,
       };
     } else {
       // If start date and end date are different, display task for each date in the range
       taskData = {
         category: selectedCategory,
         name: selectedTask,
-        startTime: new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate(), startTime.getHours(), startTime.getMinutes()),
-        endTime: new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDate(), endTime.getHours(), endTime.getMinutes()),
-        description: description
+        startTime: new Date(
+          startDate.getFullYear(),
+          startDate.getMonth(),
+          startDate.getDate(),
+          startTime.getHours(),
+          startTime.getMinutes()
+        ),
+        endTime: new Date(
+          endDate.getFullYear(),
+          endDate.getMonth(),
+          endDate.getDate(),
+          endTime.getHours(),
+          endTime.getMinutes()
+        ),
+        description: description,
       };
     }
-    sendData()
-      
+    sendData();
 
     // navigation.navigate('Home', { newTask: taskData });
 
@@ -324,7 +364,7 @@ const AddTaskScreen = ({ navigation, route }) => {
 
   const sendData = async () => {
     const token = await AsyncStorage.getItem("token");
-    console.log(token)
+    console.log(token);
     const data = {
       categoryName: selectedCategory,
       taskName: selectedTask,
@@ -335,11 +375,12 @@ const AddTaskScreen = ({ navigation, route }) => {
       endTime: endTime,
       token: token, // Add comma here
     };
-  
-    axios.post('http://10.4.132.146:5001/task/createTask', data)
+
+    axios
+      .post("http://10.4.205.62:5001/task/createTask", data)
       .then((res) => {
         console.log("TASK CREATED");
-        navigation.navigate('Home');
+        navigation.navigate("Home");
         setSelectedCategory("");
         setSelectedTask("");
         setDescription("");
@@ -359,17 +400,33 @@ const AddTaskScreen = ({ navigation, route }) => {
   // Effect hook to update tasks based on selected category
   useEffect(() => {
     switch (selectedCategory) {
-      case 'Academics/Profession':
-        setTasks(['Homework/Assignments', 'Exams/Tests', 'Study Sessions', 'Projects', 'Custom']);
+      case "Academics/Profession":
+        setTasks([
+          "Homework/Assignments",
+          "Exams/Tests",
+          "Study Sessions",
+          "Projects",
+          "Custom",
+        ]);
         break;
-      case 'Personal':
-        setTasks(['Fitness/Health', 'Career/Internship', 'Personal Tasks', 'Custom']);
+      case "Personal":
+        setTasks([
+          "Fitness/Health",
+          "Career/Internship",
+          "Personal Tasks",
+          "Custom",
+        ]);
         break;
-      case 'Social':
-        setTasks(['Extracurricular Activities', 'Meetings', 'Social Events', 'Custom']);
+      case "Social":
+        setTasks([
+          "Extracurricular Activities",
+          "Meetings",
+          "Social Events",
+          "Custom",
+        ]);
         break;
-      case 'General':
-        setTasks(['Reminders', 'Travel Plans', 'Sleep/Rest', 'Custom']);
+      case "General":
+        setTasks(["Reminders", "Travel Plans", "Sleep/Rest", "Custom"]);
         break;
       default:
         setTasks([]);
@@ -384,21 +441,25 @@ const AddTaskScreen = ({ navigation, route }) => {
   // Function to handle category selection
   const handleCategorySelect = (category) => {
     setSelectedCategory(category);
-    setSelectedTask('');
+    setSelectedTask("");
   };
 
   // Function to toggle task picker dropdown
   const togglePicker = () => {
-    setSelectedTask(selectedTask === '' ? tasks[0] : ''); // Toggle picker dropdown
+    setSelectedTask(selectedTask === "" ? tasks[0] : ""); // Toggle picker dropdown
   };
 
   // Function to handle custom task input
   const handleCustomTaskInput = () => {
-    if (customTaskName.trim() !== '') {
-      setTasks([...tasks.filter(task => task !== 'Custom'), customTaskName, 'Custom']);
+    if (customTaskName.trim() !== "") {
+      setTasks([
+        ...tasks.filter((task) => task !== "Custom"),
+        customTaskName,
+        "Custom",
+      ]);
       setSelectedTask(customTaskName);
     } else {
-      Alert.alert('Error', 'Please enter a valid task name');
+      Alert.alert("Error", "Please enter a valid task name");
     }
   };
 
@@ -412,8 +473,8 @@ const AddTaskScreen = ({ navigation, route }) => {
       // Date is in the past
       setShowStartDatePicker(false); // Hide the date picker
       Alert.alert(
-        'Invalid Date',
-        'Please select the current date or a day in the future.'
+        "Invalid Date",
+        "Please select the current date or a day in the future."
       );
     } else {
       // Date is today or in the future
@@ -432,8 +493,8 @@ const AddTaskScreen = ({ navigation, route }) => {
       // Date is in the past
       setShowEndDatePicker(false); // Hide the date picker
       Alert.alert(
-        'Invalid Date',
-        'Please select the current date or a day in the future.'
+        "Invalid Date",
+        "Please select the current date or a day in the future."
       );
     } else {
       // Date is today or in the future
@@ -444,8 +505,8 @@ const AddTaskScreen = ({ navigation, route }) => {
 
   // Utility function to format date
   const formatDate = (date) => {
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    return date.toLocaleDateString('en-US', options);
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    return date.toLocaleDateString("en-US", options);
   };
 
   // Function to handle start time change
@@ -498,12 +559,8 @@ const AddTaskScreen = ({ navigation, route }) => {
     }
   };
 
-
-
   return (
-    
     <ScrollView>
-
       <View style={styles.container}>
         {/* Header */}
         <View style={styles.header}>
@@ -516,19 +573,28 @@ const AddTaskScreen = ({ navigation, route }) => {
         {/* Category selection */}
         <Text style={styles.subHeading}>Category</Text>
         <View style={styles.filterContainer}>
-          {['Academics/Profession', 'Personal', 'Social', 'General'].map((category, index) => (
-            <TouchableOpacity
-              key={index}
-              style={[
-                styles.filter,
-                selectedCategory === category && styles.selectedFilter,
-                index === tasks.length - 1 && { marginBottom: 20 }
-              ]}
-              onPress={() => handleCategorySelect(category)}
-            >
-              <Text style={[styles.filterText, selectedCategory === category && styles.selectedFilterText]}>{category}</Text>
-            </TouchableOpacity>
-          ))}
+          {["Academics/Profession", "Personal", "Social", "General"].map(
+            (category, index) => (
+              <TouchableOpacity
+                key={index}
+                style={[
+                  styles.filter,
+                  selectedCategory === category && styles.selectedFilter,
+                  index === tasks.length - 1 && { marginBottom: 20 },
+                ]}
+                onPress={() => handleCategorySelect(category)}
+              >
+                <Text
+                  style={[
+                    styles.filterText,
+                    selectedCategory === category && styles.selectedFilterText,
+                  ]}
+                >
+                  {category}
+                </Text>
+              </TouchableOpacity>
+            )
+          )}
         </View>
 
         {/* Task selection */}
@@ -538,17 +604,22 @@ const AddTaskScreen = ({ navigation, route }) => {
             selectedValue={selectedTask}
             onValueChange={(itemValue) => setSelectedTask(itemValue)}
             style={styles.picker}
-            enabled={selectedTask !== ''} // Disable picker when selectedTask is empty
+            enabled={selectedTask !== ""} // Disable picker when selectedTask is empty
           >
             {tasks.map((task, index) => (
               <Picker.Item key={index} label={task} value={task} />
             ))}
           </Picker>
-          <Icon name="angle-down" size={20} color="white" style={styles.dropdownIcon} />
+          <Icon
+            name="angle-down"
+            size={20}
+            color="white"
+            style={styles.dropdownIcon}
+          />
         </TouchableOpacity>
 
         {/* Custom task input */}
-        {selectedTask === 'Custom' && (
+        {selectedTask === "Custom" && (
           <View style={styles.customInputContainer}>
             <TextInput
               style={styles.customInput}
@@ -556,7 +627,10 @@ const AddTaskScreen = ({ navigation, route }) => {
               value={customTaskName}
               onChangeText={(text) => setCustomTaskName(text)}
             />
-            <TouchableOpacity style={styles.addButton} onPress={handleCustomTaskInput}>
+            <TouchableOpacity
+              style={styles.addButton}
+              onPress={handleCustomTaskInput}
+            >
               <Text style={styles.addButtonText}>Add</Text>
             </TouchableOpacity>
           </View>
@@ -580,11 +654,21 @@ const AddTaskScreen = ({ navigation, route }) => {
           <Text style={styles.dueDateHeading}>Select Date</Text>
         </View>
         <View style={styles.dateContainer}>
-          <TouchableOpacity onPress={() => setShowStartDatePicker(true)} style={styles.startDateContainer}>
-            <Text style={styles.cardText}>{startDate ? formatDate(startDate) : 'Select Start Date'}</Text>
+          <TouchableOpacity
+            onPress={() => setShowStartDatePicker(true)}
+            style={styles.startDateContainer}
+          >
+            <Text style={styles.cardText}>
+              {startDate ? formatDate(startDate) : "Select Start Date"}
+            </Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => setShowEndDatePicker(true)} style={styles.endDateContainer}>
-            <Text style={styles.cardText}>{endDate ? formatDate(endDate) : 'Select End Date'}</Text>
+          <TouchableOpacity
+            onPress={() => setShowEndDatePicker(true)}
+            style={styles.endDateContainer}
+          >
+            <Text style={styles.cardText}>
+              {endDate ? formatDate(endDate) : "Select End Date"}
+            </Text>
           </TouchableOpacity>
         </View>
         {showStartDatePicker && (
@@ -613,11 +697,31 @@ const AddTaskScreen = ({ navigation, route }) => {
 
         {/* Time pickers */}
         <View style={styles.dateContainer}>
-          <TouchableOpacity onPress={() => setShowStartTimePicker(true)} style={styles.startDateContainer}>
-            <Text style={styles.cardText}>{startTime ? startTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : 'Select Start Time'}</Text>
+          <TouchableOpacity
+            onPress={() => setShowStartTimePicker(true)}
+            style={styles.startDateContainer}
+          >
+            <Text style={styles.cardText}>
+              {startTime
+                ? startTime.toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })
+                : "Select Start Time"}
+            </Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => setShowEndTimePicker(true)} style={styles.endDateContainer}>
-            <Text style={styles.cardText}>{endTime ? endTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : 'Select End Time'}</Text>
+          <TouchableOpacity
+            onPress={() => setShowEndTimePicker(true)}
+            style={styles.endDateContainer}
+          >
+            <Text style={styles.cardText}>
+              {endTime
+                ? endTime.toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })
+                : "Select End Time"}
+            </Text>
           </TouchableOpacity>
         </View>
         {showStartTimePicker && (
@@ -637,12 +741,14 @@ const AddTaskScreen = ({ navigation, route }) => {
           />
         )}
         {/* Button to create task */}
-        <TouchableOpacity style={styles.createTaskButton} onPress={handleCreateTask}>
+        <TouchableOpacity
+          style={styles.createTaskButton}
+          onPress={handleCreateTask}
+        >
           <Text style={styles.createTaskButtonText}>Create Task</Text>
         </TouchableOpacity>
       </View>
     </ScrollView>
-    
   );
 };
 
@@ -650,52 +756,52 @@ const AddTaskScreen = ({ navigation, route }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'black',
+    backgroundColor: "black",
   },
   createTaskButton: {
-    backgroundColor: '#DDFF94',
+    backgroundColor: "#DDFF94",
     borderRadius: 20,
     paddingVertical: 15,
     paddingHorizontal: 20,
-    alignSelf: 'center',
+    alignSelf: "center",
     marginTop: 20,
   },
   createTaskButtonText: {
-    color: 'black',
+    color: "black",
     fontSize: 18,
   },
 
   header: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     paddingTop: 70,
     paddingHorizontal: 20,
   },
   heading: {
     fontSize: 25,
-    color: 'white',
+    color: "white",
     marginLeft: 80,
   },
   cancel: {
     fontSize: 18,
-    color: '#A9A9A9',
+    color: "#A9A9A9",
     marginRight: 10,
   },
   subHeading: {
     fontSize: 20,
-    color: 'white',
+    color: "white",
     marginTop: 50,
     marginBottom: 20,
     marginLeft: 20,
   },
   filterContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+    flexDirection: "row",
+    flexWrap: "wrap",
     marginLeft: 20,
     marginRight: 20,
   },
   filter: {
-    backgroundColor: '#333333',
+    backgroundColor: "#333333",
     borderRadius: 20,
     paddingVertical: 10,
     paddingHorizontal: 20,
@@ -703,96 +809,96 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   selectedFilter: {
-    backgroundColor: '#DDFF94',
+    backgroundColor: "#DDFF94",
   },
   selectedFilterText: {
-    color: 'black',
+    color: "black",
   },
   filterText: {
-    color: 'white',
+    color: "white",
   },
   pickerContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginLeft: 20,
     marginRight: 20,
     marginBottom: 20,
   },
   picker: {
     flex: 1,
-    color: 'white',
+    color: "white",
   },
   dropdownIcon: {
     marginLeft: 10,
   },
   customInputContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginLeft: 20,
     marginRight: 20,
     marginBottom: 10,
   },
   customInput: {
     flex: 1,
-    backgroundColor: '#333333',
+    backgroundColor: "#333333",
     borderRadius: 20,
-    color: 'white',
+    color: "white",
     paddingHorizontal: 20,
     marginRight: 10,
   },
   addButton: {
-    backgroundColor: '#DDFF94',
+    backgroundColor: "#DDFF94",
     borderRadius: 20,
     paddingVertical: 10,
     paddingHorizontal: 20,
   },
   addButtonText: {
-    color: 'black',
+    color: "black",
   },
   descriptionContainer: {
     paddingHorizontal: 20,
     marginTop: 10,
   },
   descriptionInput: {
-    backgroundColor: '#333333',
+    backgroundColor: "#333333",
     borderRadius: 20,
-    color: 'white',
+    color: "white",
     paddingHorizontal: 20,
     paddingVertical: 10,
     marginTop: 10,
   },
   taskHeading: {
     fontSize: 20,
-    color: 'white',
+    color: "white",
     marginTop: 10,
     marginBottom: 10,
     marginLeft: 20,
   },
   descriptionHeading: {
     fontSize: 20,
-    color: 'white',
+    color: "white",
     marginTop: 10,
     marginBottom: 10,
     marginLeft: 20,
   },
   subHeadingContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     marginLeft: 30,
     marginRight: 20,
     marginTop: 20,
   },
   dueDateHeading: {
     fontSize: 20,
-    color: 'white',
+    color: "white",
   },
   dateContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     marginHorizontal: 20,
   },
   startDateContainer: {
-    backgroundColor: '#333333',
+    backgroundColor: "#333333",
     borderRadius: 20,
     paddingVertical: 15,
     paddingHorizontal: 20,
@@ -800,7 +906,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   endDateContainer: {
-    backgroundColor: '#333333',
+    backgroundColor: "#333333",
     borderRadius: 20,
     paddingVertical: 15,
     paddingHorizontal: 20,
@@ -808,12 +914,8 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   cardText: {
-    color: 'white',
+    color: "white",
   },
 });
 
-
 export default AddTaskScreen;
-
-
-

@@ -37,7 +37,7 @@ function Register() {
     };
     if (nameVerify && emailVerify && passwordVerify) {
       axios
-        .post("http://10.4.132.146:5001/auth/register", userData)
+        .post("http://10.4.205.62:5001/auth/register", userData)
         .then((res) => {
           console.log(res.data);
           if (res.data.status === "ok") {
@@ -63,10 +63,16 @@ function Register() {
         })
         .catch((error) => {
           console.error("Registration error:", error);
-          Alert.alert("Registration Failed", "An error occurred while registering. Please try again later.");
+          Alert.alert(
+            "Registration Failed",
+            "An error occurred while registering. Please try again later."
+          );
         });
     } else {
-      Alert.alert("Invalid Information", "Please check your information again.");
+      Alert.alert(
+        "Invalid Information",
+        "Please check your information again."
+      );
     }
   }
 
@@ -139,7 +145,9 @@ function Register() {
               />
               {password.length > 0 && !passwordVerify && (
                 <Text style={{ color: "red", marginLeft: 20 }}>
-                  Password must contain at least 6 characters, including at least one uppercase letter, one lowercase letter, and one number
+                  Password must contain at least 6 characters, including at
+                  least one uppercase letter, one lowercase letter, and one
+                  number
                 </Text>
               )}
             </View>
